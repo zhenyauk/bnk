@@ -52,7 +52,6 @@
         </div>
     </main>
 
-    <script src="/js/select2.full.min.js"></script>
     <script src="/js/main.js"></script>
 
 

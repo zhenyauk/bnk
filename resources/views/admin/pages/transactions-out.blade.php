@@ -11,7 +11,7 @@
                 <div class="card card__content">
                     <div class="card">
                         <div class="card__list">
-                            <form action="/transactions/in" method="get" id="from-form">
+                            <form action="/transactions/out" method="get" id="from-form">
                                 <div class="price-input">
                                     По фразе: <input minlength="2" class="myInput"name="search" @isset($search) value="{{$search}}" @endisset  placeholder="EB1910181528245 ">
                                 </div>
@@ -49,7 +49,7 @@
                                     <div class="table__list_col table__list_col-center">
                                         {{$item->created_at->format('d-m-Y') ?? ''}}
                                     </div>
-                                    <div class="table__list_col table__list_col-right" @if($item->type === 'OUT') style="color:red" @endif>
+                                    <div class="table__list_col table__list_col-right" >
                                         @if($item->type === 'OUT') - @endif {{$item->amount}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($item->account->currency_id)}}
                                     </div>
                                     <div class="table__list_col table__list_col-right">

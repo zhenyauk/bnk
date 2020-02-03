@@ -25,6 +25,8 @@ class CreateTransactionsTable extends Migration
             $table->text('description')->nullable();
             $table->decimal('balance', 10, 2);
             $table->tinyInteger('status')->default(Transaction::STATUS_NEW);
+
+
             $table->timestamps();
         });
     }

@@ -1,6 +1,6 @@
 @extends('layouts.cabinet')
 
-@section('title') Детали счета {{$account->nubmer}}@stop
+@section('title') Добавить платеж @stop
 
 @section('content')
 
@@ -20,63 +20,60 @@
                         Ваш доступный дневной лимит:  <b>0,00 EUR</b> (для необходимого использования первого одноразового пароля extraPIN)  100 000,00 EUR (требующий обязательного вторичного ввода пароля extra PIN при использовании генератора extra PIN) <b>500 000,00 EUR</b> (Company total daily lim</span>
                 </div>
 
-                <form class="selected">
+
                     <div class="select__row">
 
                         <div class="select__row_text">
                             <span class="red">*</span> Со счета
                         </div>
 
-                        <div class="select__row_item">
-                            <select class="select select_js select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                <option>
-                                    Описание Номер Доступный остаток
-                                </option>
-                                <option>
-                                    Описание Номер Доступный остаток
-                                </option>
-                            </select><span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-3w4d-container"><span class="select2-selection__rendered" id="select2-3w4d-container" title="
-                                    Описание Номер Доступный остаток
-                                ">
-                                    Описание Номер Доступный остаток
-                                </span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-                        </div>
+
+                                <form id="account_select_form" action="/payment/add" method="post">
+                                    @csrf
+                                    <select name="account" id="account_select">
+                                        @isset($accounts)
+                                            @foreach($accounts as $item)
+                                                <option @if($account->id === $item->id) selected @endif value="{{$item->id}}">{{$item->number}}  {{$item->iban}} {{$item->balance_current}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($item->currency_id)}}</option>
+                                            @endforeach
+                                        @endisset
+                                    </select>
+                                </form>
+
 
                     </div>
 
                     <div class="select__tab tab-widget">
 
-                        <a href="#" class="select__tab_check tab-widget__link active">
+                        <a href="#" class="select__tab_check tab-widget__link ">
                             <input type="radio" name="radio">
                             На личный счет
                         </a>
 
-                        <a href="#" class="select__tab_check tab-widget__link">
-                            <input type="radio" name="radio">
+                        <a href="#" class="select__tab_check tab-widget__link active">
+                            <input type="radio" name="radio" >
                             На счет другого клиента
                         </a>
 
 
-                        <div class="select__tab__content-list tab active">
-                            <div class="select__row_item">
-                                <select class="select select_js select2-hidden-accessible" tabindex="-1" aria-hidden="true">
-                                    <option>
-                                        Описание Номер Доступный остаток
-                                    </option>
-                                    <option>
-                                        Описание Номер Доступный остаток
-                                    </option>
-                                </select><span class="select2 select2-container select2-container--default" dir="ltr" style="width: 100%;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-u0ns-container"><span class="select2-selection__rendered" id="select2-u0ns-container" title="
-                                        Описание Номер Доступный остаток
-                                    ">
-                                        Описание Номер Доступный остаток
-                                    </span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                        <div class="select__tab__content-list tab active" style="display: none;">
+                            <div class="price">
+                                <form id="account_select_form3" action="sss" method="post">
+                                    @csrf
+                                    <select name="account" id="account_select3">
+                                        @isset($accounts)
+                                            @foreach($accounts as $item)
+                                                <option  value="{{$item->id}}">{{$item->number}}  {{$item->iban}} {{$item->balance_current}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($item->currency_id)}}</option>
+                                            @endforeach
+                                        @endisset
+                                    </select>
+                                </form>
                             </div>
                         </div>
 
                         <div class="select__tab__content-list tab">
-                            <div class="select__row_item-list">
-                                Счет <input type="text">
+                            <div class="form-group">
+                                <label for="account">Счет</label>
+                                <input type="text" class="form-control">
                             </div>
                             <div class="select__row_item-list">
                                 Наименование Получателя <input type="text">
@@ -95,31 +92,42 @@
                             <div class="textarea-block">
                                 Адрес Получателя
                             </div>
-                            <textarea class="textarea textarea_default">
-                            </textarea>
+                            <textarea class="textarea textarea_default form-control"></textarea>
                         </div>
 
                         <div class="textarea__item">
 
                             <div class="textarea-block">Сумма</div>
-                            <textarea class="textarea textarea_default">
-                            </textarea>
+                            <input type="text" class="form-control">
                         </div>
                         <div class="textarea__item">
                             <div class="textarea-block">
                                 Валюта
                             </div>
-                            <select class="select">
-                                <option>Рубли</option>
-                                <option>Рубли</option>
-                            </select>
+                            {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
                         </div>
+
+                        <div class="textarea__item">
+                            <div class="textarea-block">Банк получателя</div>
+                            <input type="text" class="form-control">
+                        </div>
+
+                        <div class="textarea__item">
+                            <div class="textarea-block">Референс платежа</div>
+                            <input type="text" class="form-control">
+                        </div>
+
+                        <div class="textarea__item">
+                            <div class="textarea-block">Страна</div>
+                            <input type="text" class="form-control">
+                        </div>
+
+
                         <div class="textarea__item">
                             <div class="textarea-block">
                                 Детали платежа
                             </div>
-                            <textarea class="textarea textarea_default">
-                                </textarea>
+                            <textarea class="textarea textarea_default form-control"></textarea>
                         </div>
 
 
@@ -152,7 +160,7 @@
                         </a>
                     </div>
 
-                </form>
+
 
             </div>
         </div>

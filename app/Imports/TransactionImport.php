@@ -13,13 +13,17 @@ use Maatwebsite\Excel\Concerns\ToModel;
 class TransactionImport implements ToModel
 {
 
-    public $account = 1;
+    public $account = 2;
 
 
     public function model(array $row)
     {
+
+        if($row[0] == null ?? empty($row[0]) )
+            return null;
+
         if($row[5] == null && $row[4] == null )
-            return ;
+            return null;
 
         if($row[5] == null){
             $amount = floatval($row[4]);
@@ -28,6 +32,7 @@ class TransactionImport implements ToModel
             $amount = floatval($row[5]);
             $type = 'IN';
         }
+
 
         $date = \App\Helpers\_Helper::excellTime($row[0]);
 
@@ -38,9 +43,9 @@ class TransactionImport implements ToModel
             'user_id'     => Auth::id(),
             'amount'    => $amount,
             'description'    => $description,
-            'balance' => floatval($row[7]),
+            'balance' => floatval($row[6]),
             'account_id' => $this->account,
-            'updated_at' => $date
+            'created_at' => $date
         ]);
 
         $acc = Account::find($this->account);

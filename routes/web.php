@@ -18,7 +18,18 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('import', 'ImportController@import')->name('import');
 
     Route::any('transactions', 'Admin\TransactionController@index')->name('transaction.show');
-    Route::any('transactions/arhive', 'Admin\TransactionController@arhive')->name('transaction.arhive');;
+    Route::any('transactions/arhive', 'Admin\TransactionController@arhive')->name('transaction.arhive');
+    Route::any('transactions/in', 'Admin\TransactionController@getIn')->name('transaction.in');
+    Route::any('transactions/out', 'Admin\TransactionController@getOut')->name('transaction.out');
+
+    //Платеж
+    Route::any('payment/add', 'Admin\PaymentController@add')->name('payment.add');
+
+    Route::get('payment/between', 'Admin\PaymentBetweenController@index')->name('between.index');
+
+
+
+    Route::any('test', 'TestController@index')->name('test');;
 
 
 

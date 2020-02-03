@@ -1,7 +1,7 @@
 <div class="main-menu">
     <div class="main-menu_col">
         <a href="{{route('dashboard')}}" data-menu-id="dashboard" class="main-menu__list">Мой портфель</a>
-        <a href="" data-menu-id="remittances_index" class="main-menu__list">Денежный перевод</a>
+        <a href="{{route('transaction.arhive')}}" data-menu-id="remittances_index" class="main-menu__list">Денежный перевод</a>
         <a href="" data-menu-id="services_index" class="main-menu__list">Услуги</a>
     </div>
 
@@ -23,7 +23,9 @@
         </div>
     </div>
 
-    {!! \App\Helpers\_Helper::getMenu() !!}
+    @section('menu')
+        {!! \App\Helpers\_Helper::getMenu() !!}
+    @show
 
     <div class="main-menu_col main-menu__white main-sub-menu money sub-menu-item" data-menu-parent="remittances_index" style="display: none">
         <div class="main-sub-menu__list toggler">

@@ -24,7 +24,7 @@
                                     <select name="account" id="account_select">
                                         @isset($accounts)
                                             @foreach($accounts as $item)
-                                                <option value="{{$item->id}}">{{$item->number}}  {{$item->iban}} {{$item->balance_current}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($item->currency_id)}}</option>
+                                                <option @if($account->id === $item->id) selected @endif value="{{$item->id}}">{{$item->number}}  {{$item->iban}} {{$item->balance_current}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($item->currency_id)}}</option>
                                             @endforeach
                                         @endisset
                                     </select>
@@ -37,7 +37,7 @@
                                 IBAN:
                             </div>
                             <div class="price">
-                                CY89008001700000000001955310
+                                {{$account->iban}}
                             </div>
                         </div>
                         <div class="card__list">
@@ -45,7 +45,7 @@
                                 Валюта:
                             </div>
                             <div class="price">
-                                EUR
+                                {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
                             </div>
                         </div>
                         <div class="card__list">
@@ -53,7 +53,7 @@
                                 Текущий баланс:
                             </div>
                             <div class="price">
-                               {{$trans->balance}} EUR
+                               {{$account->balance_current ?? 0}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
                             </div>
                         </div>
                         <div class="card__list">
@@ -61,7 +61,7 @@
                                 Доступный остаток:
                             </div>
                             <div class="price">
-                                {{$trans->balance}} EUR
+                                {{$account->balance_current ?? 0}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
                             </div>
                         </div>
                         <div class="card__list">
@@ -69,18 +69,26 @@
                                 Критерий поиска:
                             </div>
                             <div class="price price_row">
+                                <form action="/transactions" method="get" id="from-form">
                                 <div class="price-input">
-                                    C: <input class="myInput" id="myDatePicker-1" data-lang="ru" data-years="1995-2030" data-sundayfirst="false">
+                                    По фразе: <input minlength="2" class="myInput"name="search" @isset($search) value="{{$search}}" @endisset  placeholder="EB1910181528245 ">
                                 </div>
                                 <div class="price-input">
-                                    По: <input class="myInput" id="myDatePicker-1" data-lang="ru" data-years="1995-2030" data-sundayfirst="false">
+                                    C: <input class="myInput"name="from_date" @isset($from_date) value="{{$from_date}}" @endisset  placeholder="2019-04-30">
                                 </div>
+                                <div class="price-input">
+                                    По: <input class="myInput" name="to_date" @isset($to_date) value="{{$to_date}}" @endisset placeholder="2019-04-30">
+                                </div>
+
+                                    <div class=" " style="margin-top:10px;">
+                                        <button type="submit" class="btn btn-success">Фильтровать</button>
+                                    </div>
+
+                                </form>
                             </div>
                         </div>
 
-                        <div class="table__buttons table__buttons_offset">
-                            <a class="btn">Поиск</a>
-                        </div>
+
                     </div>
 
                     <div class="table table_center table_offset">
@@ -111,19 +119,19 @@
                             <div class="table__list @if($loop->iteration % 2) table__list-gray @endif">
                             <div class="table__list_col">
                                 <input type="radio" name="table">
-                                <a href="overview-t1-d.html"> {{$item->updated_at->format('d-m-Y')}} </a>
+                                <a href="overview-t1-d.html"> {{$item->created_at->format('d-m-Y')}} </a>
                             </div>
                             <div class="table__list_col table__list_col-center">
                                {{$item->type}}
                             </div>
                             <div class="table__list_col table__list_col-right" @if($item->type === 'OUT') style="color:red" @endif>
-                              @if($item->type === 'OUT') - @endif {{$item->amount}} EUR
+                              @if($item->type === 'OUT') - @endif {{$item->amount}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
                             </div>
                             <div class="table__list_col table__list_col-right">
-                               {{$item->balance}} EUR
+                               {{$item->balance}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
                             </div>
                             <div class="table__list_col table__list_col-right">
-                               {{$item->updated_at->format('d-m-Y')}}
+                               {{$item->created_at->format('d-m-Y')}}
                             </div>
                             <div class="table__list_col table__list_col-right">
                                 {!! $item->description !!}
@@ -163,6 +171,9 @@
     </div>
 
 
+@stop
 
 
+@section('menu')
+    {!! \App\Helpers\_Helper::getMenu('second') !!}
 @stop
