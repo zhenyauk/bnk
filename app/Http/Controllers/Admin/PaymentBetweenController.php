@@ -15,6 +15,7 @@ class PaymentBetweenController extends Controller
     public $error_1 = 'Не допускаются знаки \'$\' \'EUR\' и т.д. Сумма должна быть числом!';
     public $error_2 = 'На вашем счету недостаточно средств!';
     public $error_3 = 'Что то пошло не так';
+    public $description = "Перевод между собственными счетами";
 
 
     public function index()
@@ -29,7 +30,7 @@ class PaymentBetweenController extends Controller
     }
 
 
-    public function store(BetweenStoreRequest $request)
+    protected function store(BetweenStoreRequest $request)
     {
         // Проверка корректности суммы
         if(!( $amount = $this->checkAmount($request->amount) ))
@@ -48,12 +49,16 @@ class PaymentBetweenController extends Controller
             return back();
         }
 
+        if($request->has('description')){
+            $this->description = $request->description . " " .$this->description;
+        }
+
         return back()->withErrors([$this->error_3]);
 
     }
 
 
-    public function makePayment($amount, $from_id, $to_id)
+    protected function makePayment($amount, $from_id, $to_id)
     {
         $bill_from = Account::whereId($from_id)->whereUserId(Auth::id())->first();
         $bill_to = Account::whereId($to_id)->whereUserId(Auth::id())->first();
@@ -77,7 +82,7 @@ class PaymentBetweenController extends Controller
     }
 
 
-    public function makeTransaction($user_id, $amount, $type, $acc_id)
+    protected function makeTransaction($user_id, $amount, $type, $acc_id)
     {
         $account = Account::findOrFail($acc_id);
 
@@ -87,7 +92,7 @@ class PaymentBetweenController extends Controller
         $trans->amount = $amount;
         $trans->user_id = $user_id;
         $trans->balance = $account->balance_current;
-        $trans->description = "Перевод между своими считами";
+        $trans->description = $this->description;
         if( $trans->save() )
             return $trans;
     }
