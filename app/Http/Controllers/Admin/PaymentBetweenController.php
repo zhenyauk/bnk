@@ -6,6 +6,7 @@ use App\Account;
 use App\Helpers\CurrencyHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BetweenStoreRequest;
+use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -67,7 +68,28 @@ class PaymentBetweenController extends Controller
         if( $bill_from->save() )
             $bill_to->save();
 
+        $payment_1 = $this->makeTransaction(Auth::user()->id, $amount, 'OUT', $bill_from->id);
+        $payment_2 = $this->makeTransaction(Auth::user()->id, ( $amount * CurrencyHelper::$$bill_to_currency ), 'IN', $bill_to->id);
+
+
+
         return true;
+    }
+
+
+    public function makeTransaction($user_id, $amount, $type, $acc_id)
+    {
+        $account = Account::findOrFail($acc_id);
+
+        $trans = new Transaction();
+        $trans->account_id = $acc_id;
+        $trans->type = $type;
+        $trans->amount = $amount;
+        $trans->user_id = $user_id;
+        $trans->balance = $account->balance_current;
+        $trans->description = "Перевод между своими считами";
+        if( $trans->save() )
+            return $trans;
     }
 
     public function checkBills($bill_1, $bill_2)
