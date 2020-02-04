@@ -3,86 +3,101 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Account;
+use App\Helpers\CurrencyHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\BetweenStoreRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class PaymentBetweenController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public $error_1 = 'Не допускаются знаки \'$\' \'EUR\' и т.д. Сумма должна быть числом!';
+    public $error_2 = 'На вашем счету недостаточно средств!';
+    public $error_3 = 'Что то пошло не так';
+
+
     public function index()
     {
         $accounts = Auth::user()->accounts;
         return view('admin.pages.payment.between', compact('accounts'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    public function store(BetweenStoreRequest $request)
     {
-        //
+        // Проверка корректности суммы
+        if(!( $amount = $this->checkAmount($request->amount) ))
+            return back()->withErrors([$this->error_1]);
+
+        // Проверка попытки подменить аккаунты
+        if(!$this->checkBills($request->from_bill, $request->to_bill))
+            return abort('403');
+
+        // Проверка или есть средства на счету
+        if(!( $this->checkSumm($amount, $request->from_bill) ))
+            return back()->withErrors([$this->error_2]);
+
+
+        if( $this->makePayment($amount, $request->from_bill, $request->to_bill) ){
+            return back();
+        }
+
+        return back()->withErrors([$this->error_3]);
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+
+    public function makePayment($amount, $from_id, $to_id)
     {
-        //
+        $bill_from = Account::whereId($from_id)->whereUserId(Auth::id())->first();
+        $bill_to = Account::whereId($to_id)->whereUserId(Auth::id())->first();
+
+        $bill_to_currency = 'currency_' . $bill_to->currency_id;
+
+        $bill_from->balance_current = $bill_from->balance_current - $amount;
+
+        $bill_to->balance_current =
+            $bill_to->balance_current + ( $amount * CurrencyHelper::$$bill_to_currency );
+
+        if( $bill_from->save() )
+            $bill_to->save();
+
+        return true;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function checkBills($bill_1, $bill_2)
     {
-        //
+        if( Account::whereId($bill_1)->whereUserId(Auth::id())->first()
+            &&  Account::whereId($bill_2)->whereUserId(Auth::id())->first() )
+            return true;
+        return false;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    // Проверка корректности суммы и формата суммы
+    public function checkAmount($amount)
     {
-        //
+        if(!is_numeric($amount)){
+            if(strpos($amount, ','))
+                return str_replace(',','.',$amount);
+            return false;
+        }
+        return $amount;
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    // Проверка или есть средства на счету
+    public function checkSumm($amount, $bill)
     {
-        //
+        $account = Account::whereId($bill)->whereUserId(Auth::id())->firstOrFail();
+        if($account->balance_current >= $amount)
+            return true;
+        return false;
     }
+
+
+
 }

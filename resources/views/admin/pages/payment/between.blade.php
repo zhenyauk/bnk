@@ -25,15 +25,16 @@
                         @foreach($accounts as $item)
                             <div class="table__list ">
                                 <div class="table__list_col">
-                                    <input type="radio" name="from_bill" data-id="{{$item->id}}">
-
+                                    <input class="from_radio" type="radio" name="from_bill" data-id="{{$item->id}}">
                                 </div>
                                 <div class="table__list_col table__list_col-center" >
-                                    <input type="radio" name="to_bill" data-id="{{$item->id}}>
+                                    <input class="to_radio" type="radio" name="to_bill" data-id="{{$item->id}}">
                                 </div>
-                                <div class="table__list_col table__list_col-right" >
+
+                                <div class="table__list_col table__list_col-center">
                                     {{$item->number}}
                                 </div>
+
                                 <div class="table__list_col table__list_col-right">
                                     {{$item->accounttype->title}} / {{\App\Helpers\CurrencyHelper::getCurrencyCode($item->currency_id)}}
                                 </div>
@@ -41,6 +42,7 @@
                                 {{$item->balance_current}}
                                 {{\App\Helpers\CurrencyHelper::getCurrencyCode($item->currency_id)}}
                                 </div>
+
                                 <div class="table__list_col table__list_col-right">
                                     {{$item->balance_current}}
                                     {{\App\Helpers\CurrencyHelper::getCurrencyCode($item->currency_id)}}
@@ -52,19 +54,29 @@
                     </div>
 
                     <div class="" style="padding-top:30px; margin-bottom: 100px" >
-
+                        @isset($errors)
+                            @foreach ($errors->all() as $message)
+                                <div style="color: red">{{$message}}</div>
+                            @endforeach
+                        @endisset
+                        <form id="between_form" action="{{route('between.post')}}" method="post">
+                            @csrf
+                            <input type="hidden" id="from_bill_field" name="from_bill">
+                            <input type="hidden" id="to_bill_field" name="to_bill">
                         <div class="form-group">
                             <label for="amount">Сумма перевода</label><br>
-                            <input style="margin-top:4px;" type="text" name="amount" class="form-control">
+                            <input required style="margin-top:4px;" type="text" name="amount" class="form-control">
                         </div>
 
                         <div class="form-group" style="margin-top:10px; margin-bottom: 10px">
-                            <label for="amount">Назначение платежа</label><br>
-                            <textarea  name="" id="" cols="20" rows="3"></textarea>
+                            <label for="description">Назначение платежа</label><br>
+                            <textarea  name="description" id="description" cols="20" rows="3"></textarea>
                         </div>
 
-                        <button  type="submit" class="btn btn-success">Далее</button>
+                            <input type="submit" id="go_btn" style="display: none">
 
+                        </form>
+                        <button  id="make_payment_button" class="btn btn-success">Далее</button>
                     </div>
 
 

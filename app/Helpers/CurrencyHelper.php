@@ -6,6 +6,12 @@ class CurrencyHelper{
 
     public static $eur = 1;
     public static $doll = 0.9;
+
+
+    public static $currency_2 = 1.11;      // Евро к Доллару
+    public static $currency_1 = 0.9;       // Доллар к Евро
+
+
     const EURO = 1;
     const DOLLAR = 2;
 
