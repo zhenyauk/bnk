@@ -6,20 +6,20 @@
         <div class="row">
             <div class="col col--lg-12">
                 <div class="overview__line">
-                    <h2 class="overview__title">Входящие платежи</h2>
+                    <h2 class="overview__title">Осуществленные денежные переводы</h2>
                 </div>
                 <div class="card card__content">
                     <div class="card">
                         <div class="card__list">
-                            <form action="/transactions/out" method="get" id="from-form">
+                            <form autocomplete="off" action="/transactions/out" method="get" id="from-form">
                                 <div class="price-input">
-                                    По фразе: <input minlength="2" class="myInput"name="search" @isset($search) value="{{$search}}" @endisset  placeholder="EB1910181528245 ">
+                                    По фразе: <input minlength="2" class="myInput" name="search" @isset($search) value="{{$search}}" @endisset  placeholder="EB1910181528245 ">
                                 </div>
                                 <div class="price-input">
-                                    C: <input class="myInput"name="from_date" @isset($from_date) value="{{$from_date}}" @endisset  placeholder="2019-04-30">
+                                    C: <input class="myInput datepicker" name="from_date" @isset($from_date) value="{{$from_date}}" @endisset  placeholder="2019-04-30">
                                 </div>
                                 <div class="price-input">
-                                    По: <input class="myInput" name="to_date" @isset($to_date) value="{{$to_date}}" @endisset placeholder="2019-04-30">
+                                    По: <input class="myInput datepicker" name="to_date" @isset($to_date) value="{{$to_date}}" @endisset placeholder="2019-04-30">
                                 </div>
 
                                 <div class=" " style="margin-top:10px;">
@@ -35,7 +35,11 @@
 
                                 <div class="table__head_col">#</div>
                                 <div class="table__head_col">Дата валютирования</div>
+                                <div class="table__head_col">Назначение банк</div>
+                                <div class="table__head_col">Референс</div>
                                 <div class="table__head_col">Сумма зачисления</div>
+                                <div class="table__head_col">Тип платежа</div>
+                                <div class="table__head_col">Информация о получателе</div>
                                 <div class="table__head_col">Детали платежа</div>
 
                             </div>
@@ -50,8 +54,25 @@
                                         {{$item->created_at->format('d-m-Y') ?? ''}}
                                     </div>
                                     <div class="table__list_col table__list_col-right" >
-                                        @if($item->type === 'OUT') - @endif {{$item->amount}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($item->account->currency_id)}}
+
                                     </div>
+
+                                    <div class="table__list_col table__list_col-right">
+
+                                    </div>
+
+                                    <div class="table__list_col table__list_col-right">
+                                         {{$item->amount}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($item->account->currency_id)}}
+                                    </div>
+
+                                    <div class="table__list_col table__list_col-right">
+                                       {{ $item->type  }}
+                                    </div>
+
+                                    <div class="table__list_col table__list_col-right">
+
+                                    </div>
+
                                     <div class="table__list_col table__list_col-right">
                                         {{$item->description}}
                                     </div>
@@ -61,7 +82,7 @@
                             @endforeach
                         </div>
                         <div class="pagination pagination_offset">
-                            <!---->
+                            {{ $transactions->links() }}
                         </div>
                     </div>
                 </div>

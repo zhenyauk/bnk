@@ -8,6 +8,7 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class TransactionController extends Controller
 {
@@ -26,7 +27,7 @@ class TransactionController extends Controller
     public function getOut(Request $request)
     {
         $data = $this->getTransactions($request, 'OUT');
-        return view('admin.pages.transactions-in', $data);
+        return view('admin.pages.transactions-out', $data);
     }
 
     public function arhive(Request $request)
@@ -54,15 +55,15 @@ class TransactionController extends Controller
 
         if($request->has('from_date')){
             if($request->from_date != null){
-                $data['from_date'] = $request->from_date;
-                $transactions->where('created_at','>' , $request->from_date);
+                $data['from_date'] = $this->makeDate($request->from_date);
+                $transactions->where('created_at','>' , $data['from_date']);
             }
         }
 
         if($request->has('to_date')){
             if($request->to_date != null){
-                $data['to_date'] = $request->to_date;
-                $transactions->where('created_at','<' , $request->to_date);
+                $data['to_date'] = $this->makeDate($request->to_date);
+                $transactions->where('created_at','<' , $data['to_date']);
             }
         }
 
@@ -77,7 +78,7 @@ class TransactionController extends Controller
             $transactions->where('type' , $type);
         }
 
-        $data['transactions'] = $transactions->get();
+        $data['transactions'] = $transactions->paginate($this->per_page);
         $data['trans'] = Transaction::orderBy('id', 'desc')->first();
         $data['accounts'] = $accounts;
         $data['account'] = $account;
@@ -99,15 +100,15 @@ class TransactionController extends Controller
 
         if($request->has('from_date')){
             if($request->from_date != null){
-                $data['from_date'] = $request->from_date;
-                $transactions->where('created_at','>' , $request->from_date);
+                $data['from_date'] = $this->makeDate($request->from_date);
+                $transactions->where('created_at','>' , $data['from_date']);
             }
         }
 
         if($request->has('to_date')){
             if($request->to_date != null){
-                $data['to_date'] = $request->to_date;
-                $transactions->where('created_at','<' , $request->to_date);
+                $data['to_date'] = $this->makeDate($request->to_date);
+                $transactions->where('created_at','<' , $data['to_date'] );
             }
         }
 
@@ -122,7 +123,7 @@ class TransactionController extends Controller
             $transactions->where('type' , $type);
         }
 
-        $data['transactions'] = $transactions->get();
+        $data['transactions'] = $transactions->paginate($this->per_page);
 
 
         $data['trans'] = Transaction::orderBy('id', 'desc')->first();
@@ -131,6 +132,11 @@ class TransactionController extends Controller
         return $data;
     }
 
+
+    public function makeDate($date)
+    {
+        return Carbon::createFromFormat('d/m/Y', $date);
+    }
 
 
 }

@@ -11,15 +11,15 @@
                 <div class="card card__content">
                     <div class="card">
                         <div class="card__list">
-                            <form action="/transactions/in" method="get" id="from-form">
+                            <form autocomplete="off" action="/transactions/in" method="get" id="from-form">
                                 <div class="price-input">
                                     По фразе: <input minlength="2" class="myInput"name="search" @isset($search) value="{{$search}}" @endisset  placeholder="EB1910181528245 ">
                                 </div>
                                 <div class="price-input">
-                                    C: <input class="myInput"name="from_date" @isset($from_date) value="{{$from_date}}" @endisset  placeholder="2019-04-30">
+                                    C: <input class="myInput datepicker" utocomplete="off" name="from_date" @isset($from_date) value="{{$from_date}}" @endisset  placeholder="2019-04-30">
                                 </div>
                                 <div class="price-input">
-                                    По: <input class="myInput" name="to_date" @isset($to_date) value="{{$to_date}}" @endisset placeholder="2019-04-30">
+                                    По: <input class="myInput datepicker" name="to_date" @isset($to_date) value="{{$to_date}}" @endisset placeholder="2019-04-30">
                                 </div>
 
                                 <div class=" " style="margin-top:10px;">
@@ -60,8 +60,9 @@
                                 </div>
                             @endforeach
                         </div>
+
                         <div class="pagination pagination_offset">
-                            <!---->
+                            {{ $transactions->links() }}
                         </div>
                     </div>
                 </div>

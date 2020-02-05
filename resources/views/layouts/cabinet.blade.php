@@ -42,6 +42,14 @@
 
         <script src="/js/my.js"></script>
 
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            $( function() {
+                $( ".datepicker" ).datepicker();
+            } );
+        </script>
     </header>
     <main class="main main_bg" id="vue-app" v-blockui="preloaders.page">
         <div class="wrapper wrapper_default">
@@ -51,7 +59,18 @@
             </div>
         </div>
     </main>
-
+    <style>
+        .pagination li{
+            list-style: none;
+            font-size: 20px;
+        }
+        .pagination li a{
+            color:#86a4cc;
+        }
+        li.page-item.active{
+            margin-left: 24px;
+        }
+    </style>
     <script src="/js/main.js"></script>
 
 

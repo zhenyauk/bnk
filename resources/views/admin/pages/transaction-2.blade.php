@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col col--lg-12">
                 <div class="overview__line">
-                    <h2 class="overview__title">Движение средств по счету</h2>
+                    <h2 class="overview__title">Архив денежных переводов</h2>
                 </div>
                 <div class="card card__content">
                     <div class="card__content_blue">
@@ -56,15 +56,15 @@
                             <div class="card__list">
                                 <div class="name">Критерий поиска:</div>
                                 <div class="price price_row">
-                                    <form action="/transactions" method="get" id="from-form">
+                                    <form autocomplete="off" action="/transactions" method="get" id="from-form">
                                         <div class="price-input">
-                                            По фразе: <input minlength="2" class="myInput"name="search" @isset($search) value="{{$search}}" @endisset  placeholder="EB1910181528245 ">
+                                            По фразе: <input minlength="2" class="myInput" name="search" @isset($search) value="{{$search}}" @endisset  placeholder="EB1910181528245 ">
                                         </div>
                                         <div class="price-input">
-                                            C: <input class="myInput"name="from_date" @isset($from_date) value="{{$from_date}}" @endisset  placeholder="2019-04-30">
+                                            C: <input class="myInput datepicker" name="from_date" @isset($from_date) value="{{$from_date}}" @endisset  placeholder="2019-04-30">
                                         </div>
                                         <div class="price-input">
-                                            По: <input class="myInput" name="to_date" @isset($to_date) value="{{$to_date}}" @endisset placeholder="2019-04-30">
+                                            По: <input class="datepicker myInput" name="to_date" @isset($to_date) value="{{$to_date}}" @endisset placeholder="2019-04-30">
                                         </div>
 
                                         <div class=" " style="margin-top:10px;">
@@ -86,6 +86,7 @@
                             <div class="table__head_col">Остаток</div>
                             <div class="table__head_col">Дата валютирования</div>
                             <div class="table__head_col">Комментарии</div>
+                            <div class="table__head_col">Статус</div>
                         </div>
 
 
@@ -112,6 +113,10 @@
                             <div class="table__list_col table__list_col-right">
                                 {{$item->comment ?? ''}}
                             </div>
+
+                            <div class="table__list_col table__list_col-right">
+                                Выполнен
+                            </div>
                         </div>
                         @endforeach
 
@@ -122,7 +127,7 @@
 
 
                     <div class="pagination pagination_offset">
-                        <!---->
+                        {{ $transactions->links() }}
                     </div>
                 </div>
                 <div class="table__buttons table__buttons_offset"><a href="#" class="btn">Назад</a></div>
