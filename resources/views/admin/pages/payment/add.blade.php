@@ -11,7 +11,7 @@
 
                 <div class="overview__line">
                     <h2 class="overview__title">
-                        Конверсионные платежи (Этап 1 из 3)
+                        Оформить платеж
                     </h2>
                 </div>
 
