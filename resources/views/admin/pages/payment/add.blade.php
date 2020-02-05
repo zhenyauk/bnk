@@ -5,7 +5,7 @@
 @section('content')
 
 
-    <div class="main-content main-content_height" style="min-height: 700px;">
+    <div class="main-content main-content_height" style="min-height: 700px; overflow: scroll">
         <div class="row">
             <div class="col col--lg-12">
 
@@ -27,7 +27,6 @@
                             <span class="red">*</span> Со счета
                         </div>
 
-
                                 <form id="account_select_form" action="/payment/add" method="post">
                                     @csrf
                                     <select name="account" id="account_select">
@@ -39,127 +38,99 @@
                                     </select>
                                 </form>
 
-
                     </div>
 
                     <div class="select__tab tab-widget">
+                       
+                        <form action="{{route('payment.store')}}" method="post">
+                            <p style="margin:10px 0;"><label for="">Наименование плательщика</label></p>
+                            <p><textarea name="payer_name" id="" cols="20" rows="4"></textarea></p>
 
-                        <a href="#" class="select__tab_check tab-widget__link ">
-                            <input type="radio" name="radio">
-                            На личный счет
-                        </a>
+                            <p style="margin:10px 0;"><label for="">Номер телефона плательщика</label></p>
+                            <p><input type="text" name="payer_phone"></p>
 
-                        <a href="#" class="select__tab_check tab-widget__link active">
-                            <input type="radio" name="radio" >
-                            На счет другого клиента
-                        </a>
-
-
-                        <div class="select__tab__content-list tab active" style="display: none;">
-                            <div class="price">
-                                <form id="account_select_form3" action="sss" method="post">
-                                    @csrf
-                                    <select name="account" id="account_select3">
-                                        @isset($accounts)
-                                            @foreach($accounts as $item)
-                                                <option  value="{{$item->id}}">{{$item->number}}  {{$item->iban}} {{$item->balance_current}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($item->currency_id)}}</option>
-                                            @endforeach
-                                        @endisset
-                                    </select>
-                                </form>
-                            </div>
-                        </div>
-
-                        <div class="select__tab__content-list tab">
-                            <div class="form-group">
-                                <label for="account">Счет</label>
-                                <input type="text" class="form-control">
-                            </div>
-                            <div class="select__row_item-list">
-                                Наименование Получателя <input type="text">
-                            </div>
-                        </div>
 
                     </div>
 
                     <div class="line-req">
-                        <label><input type="checkbox"> Сохранить реквизиты получателя под названием:</label>
-                        <input type="text">
+                        <label> Пожалуйста, введите реквезиты получателя или выбирите соответствующие реквезиты из списка:</label><select
+                                name="" id="">
+                            <option value="">Выбирите</option>
+                        </select>
                     </div>
 
                     <div class="textarea-content">
                         <div class="textarea__item">
                             <div class="textarea-block">
-                                Адрес Получателя
+                                Адрес Получателя*
                             </div>
-                            <textarea class="textarea textarea_default form-control"></textarea>
+                            <textarea name="recipier_info" class="textarea textarea_default form-control"></textarea>
                         </div>
+
+                        <div class="textareaitem" style="margin:10px 0">
+                            <div class="textarea-block" style="float: left">
+                                Страна получателя*
+                            </div>
+                            <select value="recipier_country">
+                                @foreach($countries as $item)
+                                    <option name="{{$item->id}}" id="">{{$item->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
 
                         <div class="textarea__item">
 
-                            <div class="textarea-block">Сумма</div>
-                            <input type="text" class="form-control">
+                            <div class="textarea-block">Сумма*</div>
+                            <input name="amount" required type="text" class="form-control" style="margin-right: 10px"> {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
                         </div>
+                        <p style="font-weight: bold; margin:20px 0 10px 0; ">Сведения о получателе</p>
+
+                        <div class="textarea__item">
+                            <div class="textarea-block">IBAN/Счет Получателя*</div>
+                            <input type="text" required name="iban" class="form-control">
+                        </div>
+
+                        <div class="textarea__item">
+                            <div class="textarea-block">Полное имя и адрес*</div>
+                            <input type="text" required name="recipier_name" class="form-control">
+                        </div>
+
+                        <div class="textarea__item">
+                            <div class="textarea-block">БИК Банка получателя</div>
+                            <input type="text"  name="bic_bank" class="form-control">
+                        </div>
+
+
                         <div class="textarea__item">
                             <div class="textarea-block">
-                                Валюта
+                                Банк получателя*
                             </div>
-                            {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
+                            <input type="text"  required name="recipier_bank">
                         </div>
-
-                        <div class="textarea__item">
-                            <div class="textarea-block">Банк получателя</div>
-                            <input type="text" class="form-control">
-                        </div>
-
-                        <div class="textarea__item">
-                            <div class="textarea-block">Референс платежа</div>
-                            <input type="text" class="form-control">
-                        </div>
-
-                        <div class="textarea__item">
-                            <div class="textarea-block">Страна</div>
-                            <input type="text" class="form-control">
-                        </div>
-
 
                         <div class="textarea__item">
                             <div class="textarea-block">
                                 Детали платежа
                             </div>
-                            <textarea class="textarea textarea_default form-control"></textarea>
+                            <textarea name="recipier_info" id="" cols="20" rows="3"></textarea>
+                        </div>
+
+                        <div class="line-req">
+                            <label><input type="checkbox" name="save"> Сохранить реквизиты получателя под названием:</label>
+
                         </div>
 
 
-
-
                     </div>
 
-                    <div class="line-req">
-                        <label><input type="checkbox"> Сохранить платеж в мои Ярлыки как; </label>
-                        <input type="text">
-                    </div>
-
-                    <div class="line-yellow">
-                        Пожалуйста, укажите дату выполнения данного платежа:
-                    </div>
-
-                    <span>
-                        Выполнить заявку:
-                    </span>
-
-                    <div class="selected__data">
-                        <div class="price-input">
-                            Выберите дату: <input class="myInput" id="myDatePicker-1" data-lang="ru" data-years="1995-2030" data-sundayfirst="false">
-                        </div>
-                    </div>
-
+                    @csrf
                     <div class="form__button">
-                        <a href="price-2-1.html" class="btn btn_blue">
+                        <button type="submit" class="btn btn_blue">
                             Далее
-                        </a>
+                        </button>
                     </div>
-
+            </form>
 
 
             </div>

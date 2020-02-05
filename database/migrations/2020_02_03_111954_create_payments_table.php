@@ -23,7 +23,7 @@ class CreatePaymentsTable extends Migration
             $table->string('payer_name')->nullable();
             $table->string('payer_phone')->nullable();
             $table->string('payer_country')->nullable();
-            $table->decimal('payer_amount', 10, 2);
+            $table->decimal('amount', 10, 2);
             $table->integer('payer_currency_id');
             $table->string('reference')->nullable();
             $table->integer('file')->nullable();

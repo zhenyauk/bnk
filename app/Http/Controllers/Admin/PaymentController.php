@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Account;
+use App\Country;
 use App\Http\Controllers\Controller;
+use App\Template;
 use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +17,7 @@ class PaymentController extends Controller
 
     }
 
-    public function add(Request $request)
+    public function addPayment(Request $request)
     {
         if($request->has('account')){
             $account = Account::whereId($request->account)->where('user_id', Auth::id())->first();
@@ -25,7 +27,10 @@ class PaymentController extends Controller
 
         $accounts = Auth::user()->accounts;
 
-        return view('admin.pages.payment.add', compact('accounts', 'account'));
+        $countries = Country::get();
+
+
+        return view('admin.pages.payment.add', compact('accounts', 'account', 'countries'));
     }
 
 
@@ -33,5 +38,13 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         dd($request->all());
+        if($request->has('save'))
+            $this->makeTemplate($request);
+    }
+
+    public function makeTemplate($request)
+    {
+        $template = new Template();
+
     }
 }
