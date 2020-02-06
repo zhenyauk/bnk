@@ -103,8 +103,8 @@
                             <div class="table__list_col table__list_col-right" >
                                 {{$item->updated_at->format('d-m-Y')}}
                             </div>
-                            <div class="table__list_col table__list_col-right" @if($item->type === 'OUT') style="color:red" @endif>
-                                @if($item->type === 'OUT') - @endif {{$item->amount}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
+                            <div class="table__list_col table__list_col-right" >
+                                 {{$item->amount}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
                             </div>
                             <div class="table__list_col table__list_col-right">
                                 {{$item->payment->recipier_name ?? $item->description}}

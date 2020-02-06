@@ -78,7 +78,7 @@ class TransactionController extends Controller
             $transactions->where('type' , $type);
         }
 
-        $data['transactions'] = $transactions->paginate($this->per_page);
+        $data['transactions'] = $transactions->whereType('OUT')->orderBy('created_at','desc')->paginate($this->per_page);
         $data['trans'] = Transaction::orderBy('id', 'desc')->first();
         $data['accounts'] = $accounts;
         $data['account'] = $account;

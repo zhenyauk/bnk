@@ -11,7 +11,10 @@ class Transaction extends Model
 {
     use FilterTrait;
 
-
+    const STATUS_NEW = 4;
+    const STATUS_APPROVED = 2;
+    const STATUS_REJECTED = 3;
+    const STATUS_COMPLETED = 1;
 
     public function account()
     {

@@ -6,8 +6,11 @@ use App\Account;
 
 class CurrencyHelper{
 
+    // (amount / self) * currency
     public static $eur = 1;
-    public static $doll = 0.9;
+    public static $doll = 0.896;
+    public static $dol = 0.896;
+    public static $usd = 0.896;
 
     public static $currency_2 = 1.11;      // Евро к Доллару
     public static $currency_1 = 0.896;       // Доллар к Евро
@@ -34,6 +37,23 @@ class CurrencyHelper{
     const STATUS_APPROVED = 2;
     const STATUS_REJECTED = 3;
     const STATUS_COMPLETED = 4;
+
+
+    /**
+     * @return string
+     */
+
+    public static function Calc($amount, $from_currency, $to_currency)
+    {
+        return (  $amount /  self::$$from_currency ) *  self::$$to_currency;
+    }
+
+    public static function Calculate($amount, $from_currency, $to_currency)
+    {
+        $from_currency = strtolower( self::getCurrencyCode($from_currency) );
+        $to_currency = strtolower( self::getCurrencyCode($to_currency) );
+        return self::Calc($amount, $from_currency, $to_currency);
+    }
 
     public static function getStatusName($id)
     {
