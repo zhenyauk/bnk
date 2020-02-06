@@ -23,6 +23,10 @@ Route::group(['middleware' => 'auth'], function(){
     Route::any('transactions/out', 'Admin\TransactionController@getOut')->name('transaction.out');
     Route::get('transactions/apply/{id}', 'Admin\TransactionController@apply')->name('transaction.apply');
 
+    Route::view('transactions/about', 'admin.pages.perevod')->name('page.transaction.about');
+
+
+
     Route::get('payment/create', 'Admin\PaymentController@create')->name('payment.create');
     Route::post('payment/create', 'Admin\PaymentController@postAdminPayment')->name('payment.post');
 

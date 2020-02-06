@@ -144,6 +144,9 @@ class PaymentController extends Controller
     // Вставить данные платежа созданного админом
     public function postAdminPayment(Request $request)
     {
+        if(Auth::user()->role !== 'admin')
+            abort('403');
+
         $account = Account::findOrFail($request->account);
         $user_id = Account::findOrFail($request->account)->user->id;
 

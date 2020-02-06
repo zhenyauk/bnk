@@ -1,7 +1,7 @@
 <div class="main-menu">
     <div class="main-menu_col">
         <a href="{{route('dashboard')}}" data-menu-id="dashboard" class="main-menu__list">Мой портфель</a>
-        <a href="{{route('transaction.arhive')}}" data-menu-id="remittances_index" class="main-menu__list">Денежный перевод</a>
+        <a href="{{route('page.transaction.about')}}" data-menu-id="remittances_index" class="main-menu__list">Денежный перевод</a>
         <a href="" data-menu-id="services_index" class="main-menu__list">Услуги</a>
     </div>
 
