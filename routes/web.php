@@ -25,6 +25,8 @@ Route::group(['middleware' => 'auth'], function(){
     //Платеж
     Route::any('payment/add', 'Admin\PaymentController@addPayment')->name('payment.add');
     Route::post('payment', 'Admin\PaymentController@store')->name('payment.store');
+    Route::post('/payment/finish', 'Admin\PaymentController@finish')->name('payment.finish');
+    Route::post('/payment/step3', 'Admin\PaymentController@step3')->name('payment.step3');
 
     Route::get('payment/between', 'Admin\PaymentBetweenController@index')->name('between.index');
     Route::post('payment/between', 'Admin\PaymentBetweenController@store')->name('between.post');

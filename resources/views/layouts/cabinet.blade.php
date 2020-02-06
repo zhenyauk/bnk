@@ -70,6 +70,34 @@
         li.page-item.active{
             margin-left: 24px;
         }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            /* display: none; <- Crashes Chrome on hover */
+            -webkit-appearance: none;
+            margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+        }
+
+        .block-table{
+            width:50%;
+            float: left;
+            text-align: right;
+            padding:10px 20px;
+            border:1px solid #DEE6F0;
+            font-weight: bold;
+        }
+        .block-table1{
+            width:50%;
+            float: left;
+            padding: 10px 20px;
+            border:1px solid #DEE6F0;
+        }
+        .info{
+            background: #DEE6F0;
+            text-align: center;
+            margin:0 auto;
+            font-weight: bold;
+            padding: 10px;
+        }
     </style>
     <script src="/js/main.js"></script>
 

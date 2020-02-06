@@ -2,6 +2,8 @@
 
 namespace App\Helpers;
 
+use App\Account;
+use App\Country;
 use App\Leftmenu;
 use Carbon\Carbon;
 
@@ -22,6 +24,16 @@ class _Helper {
     public static function getMenu($slug = 'first')
     {
         return Leftmenu::whereSlug($slug)->first()->menu_code;
+    }
+
+    public static function getCountry($id)
+    {
+        return Country::find($id)->name;
+    }
+
+    public static function getAccountNumber($id)
+    {
+        return Account::find($id)->number;
     }
 
 

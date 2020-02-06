@@ -16,12 +16,12 @@ class CreateTemplatesTable extends Migration
         Schema::create('templates', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('user_id')->nullable();
-            $table->integer('to_bill');
+            $table->string('iban');
             $table->string('recipier_name')->nullable();
             $table->string('recipier_phone')->nullable();
-            $table->string('recipier_country')->nullable();
-            $table->decimal('recipient_amount', 10, 2);
-            $table->integer('recipient_currency_id');
+            $table->string('country_id')->nullable();
+            $table->decimal('amount', 10, 2);
+            $table->string('bic_bank');
             $table->string('recipier_bank')->nullable();
             $table->text('recipier_info')->nullable();
             $table->timestamps();

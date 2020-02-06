@@ -53,27 +53,30 @@
                     </div>
 
                     <div class="line-req">
-                        <label> Пожалуйста, введите реквезиты получателя или выбирите соответствующие реквезиты из списка:</label><select
-                                name="" id="">
-                            <option value="">Выбирите</option>
-                        </select>
+
+                            <input type="hidden" name="account" value="{{$account->id}}">
+                            <label> Пожалуйста, введите реквезиты получателя или выбирите соответствующие реквезиты из списка:</label>
+                            <select name="" id="">
+                                <option value="">Выбирите</option>
+                                @isset($templates)
+                                    @foreach($templates as $item)
+                                         <option value="{{$item->id}}">{{$item->iban}} | {{$item->recipier_name}}</option>
+                                    @endforeach
+                                @endisset
+                            </select>
+
                     </div>
 
                     <div class="textarea-content">
-                        <div class="textarea__item">
-                            <div class="textarea-block">
-                                Адрес Получателя*
-                            </div>
-                            <textarea name="recipier_info" class="textarea textarea_default form-control"></textarea>
-                        </div>
+
 
                         <div class="textareaitem" style="margin:10px 0">
                             <div class="textarea-block" style="float: left">
                                 Страна получателя*
                             </div>
-                            <select value="recipier_country">
+                            <select name="country_id" value="recipier_country">
                                 @foreach($countries as $item)
-                                    <option name="{{$item->id}}" id="">{{$item->name}}</option>
+                                    <option  id="{{$item->id}}" value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -82,13 +85,13 @@
                         <div class="textarea__item">
 
                             <div class="textarea-block">Сумма*</div>
-                            <input name="amount" required type="text" class="form-control" style="margin-right: 10px"> {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
+                            <input name="amount" required type="number" class="form-control" style="margin-right: 10px"> {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
                         </div>
                         <p style="font-weight: bold; margin:20px 0 10px 0; ">Сведения о получателе</p>
 
                         <div class="textarea__item">
                             <div class="textarea-block">IBAN/Счет Получателя*</div>
-                            <input type="text" required name="iban" class="form-control">
+                            <input type="number"  required name="iban" class="form-control">
                         </div>
 
                         <div class="textarea__item">
@@ -115,10 +118,25 @@
                             </div>
                             <textarea name="recipier_info" id="" cols="20" rows="3"></textarea>
                         </div>
+                        <div class="textarea__item">
+                            <div class="textarea-block">
+                                Комиссия
+                            </div>
+                            <select name="comision" id="">
+                                <option value="1">Общая</option>
+                                <option value="2">Все расходы возложены на Отправителя</option>
+                                <option value="3">Все расходы возложены на Получателя</option>
+                            </select>
+                        </div>
+
+                        <div class="textarea__item">
+                            <input required name="conditions" type="checkbox" id="conditions"><Label for="conditions">Я прочител и принял <a href="/about">условия</a> которые применяются
+                            к исходящим\входящим переводам</Label>
+                        </div>
+
 
                         <div class="line-req">
                             <label><input type="checkbox" name="save"> Сохранить реквизиты получателя под названием:</label>
-
                         </div>
 
 
