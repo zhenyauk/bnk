@@ -101,6 +101,8 @@ class CurrencyHelper{
 
     public static function getCurrencyCode($id)
     {
+        $id = (int) $id;
+
         if($id === 1)
             return "EUR";
 
@@ -126,7 +128,7 @@ class CurrencyHelper{
     {
         $type = (int) $type;
 
-        if($amout > 5000){
+        if($amout < 5000){
             if($type === 1)
                 return self::$comision_1_amount;
 
@@ -148,5 +150,7 @@ class CurrencyHelper{
 
         }
     }
+
+
 
 }

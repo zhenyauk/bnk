@@ -81,11 +81,14 @@
                             </select>
                         </div>
 
-
                         <div class="textarea__item">
-
                             <div class="textarea-block">Сумма*</div>
-                            <input name="amount" required type="number" class="form-control" style="margin-right: 10px"> {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
+                            <input name="amount" required type="number" class="form-control" style="margin-right: 10px">
+                            <select name="currency" id="">
+                                <option value="1" @if($account->currency_id == 1) selected @endif  >{{\App\Helpers\CurrencyHelper::getCurrencyCode(1)}}</option>
+                                <option value="2" @if($account->currency_id == 2) selected @endif >{{\App\Helpers\CurrencyHelper::getCurrencyCode(2)}}</option>
+                            </select>
+
                         </div>
                         <p style="font-weight: bold; margin:20px 0 10px 0; ">Сведения о получателе</p>
 

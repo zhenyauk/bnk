@@ -109,7 +109,7 @@
                         Основная сумма
                     </div>
                     <div class="block-table1">
-                        {{ \App\Helpers\CurrencyHelper::getAccountCurrencyCode(session('form_data.account'))}}
+                        {{ \App\Helpers\CurrencyHelper::getCurrencyCode(session('form_data.currency'))}}
                         {{session('form_data.amount')}}
                     </div>
 
@@ -126,9 +126,12 @@
                     </div>
                     <div class="block-table1">
                         1 USD = {{\App\Helpers\CurrencyHelper::$currency_1}} EUR
-
                     </div>
-                    <div class="clear" style="clear: both"></div>
+
+
+
+
+                <div class="clear" style="clear: both"></div>
                 <form action="/payment/finish" method="post">
 
                     <div class="textarea__item">

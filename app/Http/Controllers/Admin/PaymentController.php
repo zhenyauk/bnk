@@ -43,10 +43,20 @@ class PaymentController extends Controller
 
     public function store(PaymentRequest $request)
     {
-        //dd($request->all());
+
         if($request->has('save'))
             $this->makeTemplate($request);
+
+        $acc = Account::find($request->account);
+
         $request->session()->put('form_data',$request->all());
+
+        // Конвертация валюты, если отличается от счета
+        if($request->currency != $acc->currency_id){
+            $amount = CurrencyHelper::Calculate($request->amount, $acc->currency_id, (int) $request->currency);
+            $request->session()->put('form_data.amount', round($amount, 2));
+        }
+
 
         //dd( session('form_data'));
         return view('admin.pages.payment.step2');
@@ -66,9 +76,13 @@ class PaymentController extends Controller
         if(!$acc = Account::whereId($account)->whereUserId(Auth::id())->first())
             return abort('403');
 
+
+
         if($acc->currency_id != 2){
             $comision = CurrencyHelper::Calculate(session('form_data.amount'), $acc->currency_id, 2);
         }
+
+
 
         //Создать платеж
         $payment = new Payment();
