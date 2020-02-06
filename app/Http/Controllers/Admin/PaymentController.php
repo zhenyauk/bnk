@@ -129,5 +129,47 @@ class PaymentController extends Controller
        return $template;
     }
 
+    public function create()
+    {
+        if(Auth::user()->role !== 'admin'){
+            abort('403');
+        }
+
+        $accounts = Account::with('user')->get();
+        $countries = Country::get();
+
+        return view('admin.pages.payment.create', compact('countries', 'accounts'));
+    }
+
+    // Вставить данные платежа созданного админом
+    public function postAdminPayment(Request $request)
+    {
+        $account = Account::findOrFail($request->account);
+        $user_id = Account::findOrFail($request->account)->user->id;
+
+        $last_trans = Transaction::whereUserId($user_id)
+            ->whereAccountId($account->id)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        if((int) $request->currency_id != $account->currency_id){
+            $amount = CurrencyHelper
+                ::Calculate($request->amount, $request->currency_id, $account->currency);
+        }else{
+            $amount = $request->amount;
+        }
+
+        $trans = new Transaction();
+        $trans->fill($request->all());
+        $trans->user_id = $user_id;
+        $trans->account_id = $request->account;
+        $trans->type = 'IN';
+        $trans->amount = $amount;
+        $trans->status = 1;
+        $trans->balance = $last_trans->balance + $amount;
+        $trans->save();
+        return view('admin.pages.payment.done');
+    }
+
 
 }

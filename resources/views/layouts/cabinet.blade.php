@@ -57,7 +57,9 @@
                 @if(Auth::user()->role === 'admin')
                         <div class="main-menu_col">
                             <a href="{{route('transaction.arhive')}}" data-menu-id="remittances_index" class="main-menu__list">Денежные переводы</a>
+                            <a href="{{route('payment.create')}}" data-menu-id="remittances_index" class="main-menu__list">Создать платеж</a>
                         </div>
+
                 @else
                     @include('parts.mainmenu')
                 @endif
