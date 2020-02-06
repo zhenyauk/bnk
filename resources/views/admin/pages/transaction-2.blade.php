@@ -80,12 +80,11 @@
 
                     <div class="table table_center table_offset">
                         <div class="table__head">
+                            <div class="table__head_col">Вид поручения</div>
+                            <div class="table__head_col">Дата введения информации</div>
                             <div class="table__head_col">Дата выполнения операции</div>
-                            <div class="table__head_col">Детали платежа</div>
                             <div class="table__head_col">Сумма</div>
-                            <div class="table__head_col">Остаток</div>
-                            <div class="table__head_col">Дата валютирования</div>
-                            <div class="table__head_col">Комментарии</div>
+                            <div class="table__head_col">Получатель</div>
                             <div class="table__head_col">Статус</div>
                         </div>
 
@@ -95,27 +94,24 @@
                             <div class="table__list_col">
                                 <input type="radio" name="table">
                                 <a href="overview-t1-d.html">
-                                    {{$item->created_at->format('d-m-Y')}}
+                                   Денежный перевод
                                 </a>
                             </div>
                             <div class="table__list_col table__list_col-center">
-                               {{$item->description ?? ''}}
+                                {{$item->created_at->format('d-m-Y')}}
+                            </div>
+                            <div class="table__list_col table__list_col-right" >
+                                {{$item->updated_at->format('d-m-Y')}}
                             </div>
                             <div class="table__list_col table__list_col-right" @if($item->type === 'OUT') style="color:red" @endif>
                                 @if($item->type === 'OUT') - @endif {{$item->amount}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
                             </div>
                             <div class="table__list_col table__list_col-right">
-                                {{$item->balance}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
-                            </div>
-                            <div class="table__list_col table__list_col-right">
-                                {{$item->created_at->format('d-m-Y')}}
-                            </div>
-                            <div class="table__list_col table__list_col-right">
-                                {{$item->comment ?? ''}}
+                                {{$item->payment->recipier_name ?? $item->description}}
                             </div>
 
                             <div class="table__list_col table__list_col-right">
-                                Выполнен
+                                {{\App\Helpers\CurrencyHelper::getStatusName($item->status)}}
                             </div>
                         </div>
                         @endforeach

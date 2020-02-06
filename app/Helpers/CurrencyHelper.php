@@ -25,6 +25,33 @@ class CurrencyHelper{
     public static $comision_3_amount = 0;
     public static $comision_4_amount = 110;
 
+    public static $status_4 = 'Создан';
+    public static $status_1 = 'Выполнен';
+    public static $status_2 = 'В обработке';
+    public static $status_3 = 'Отменен';
+
+
+    const STATUS_APPROVED = 2;
+    const STATUS_REJECTED = 3;
+    const STATUS_COMPLETED = 4;
+
+    public static function getStatusName($id)
+    {
+        if($id == 1)
+            return self::$status_1;
+
+        if($id == 2)
+            return self::$status_2;
+
+        if($id == 3)
+            return self::$status_3;
+
+        if($id == 4)
+            return self::$status_4;
+
+        return 'Unknown';
+    }
+
 
 
     public static function change($bill)
