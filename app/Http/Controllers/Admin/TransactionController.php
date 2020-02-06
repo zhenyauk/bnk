@@ -43,10 +43,22 @@ class TransactionController extends Controller
 
         if($request->has('account')){
             $account = Account::find($request->account);
-            $transactions->where('account_id', $request->account)->whereUserId(Auth::id());
+            if(Auth::user()->role === 'admin'){
+
+            }else{
+                $transactions->where('account_id', $request->account)->whereUserId(Auth::id());
+            }
+
         }else{
-            $account = Auth::user()->account;
-            $transactions->where('account_id', $account->id)->whereUserId(Auth::id());
+
+            if(Auth::user()->role === 'admin'){
+
+            }else{
+                $account = Auth::user()->account;
+                $transactions->where('account_id', $account->id)->whereUserId(Auth::id());
+            }
+
+
         }
 
         $accounts = Auth::user()->accounts;
@@ -81,7 +93,7 @@ class TransactionController extends Controller
         $data['transactions'] = $transactions->whereType('OUT')->orderBy('created_at','desc')->paginate($this->per_page);
         $data['trans'] = Transaction::orderBy('id', 'desc')->first();
         $data['accounts'] = $accounts;
-        $data['account'] = $account;
+        $data['account'] = $account ?? '';
         return $data;
     }
 
@@ -136,6 +148,18 @@ class TransactionController extends Controller
     public function makeDate($date)
     {
         return Carbon::createFromFormat('d/m/Y', $date);
+    }
+
+
+    public function apply($id)
+    {
+        if(Auth::user()->role === 'admin'){
+            $trans = Transaction::find($id);
+            $trans->status = 1;
+            $trans->save();
+            return back();
+        }
+        return abort('403');
     }
 
 

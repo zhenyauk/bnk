@@ -28,7 +28,7 @@
                     <a href="#">
                         <img src="/images/sitemap1.gif" alt="">
                     </a>
-                    <a href="#" class="logout-btn"><img src="/images/exit.gif" alt=""></a>
+                    <a href="/logout" class="logout-btn"><img src="/images/exit.gif" alt=""></a>
                 </div>
 
             </div>
@@ -54,8 +54,16 @@
     <main class="main main_bg" id="vue-app" v-blockui="preloaders.page">
         <div class="wrapper wrapper_default">
             <div class="wrapper__content">
-                @include('parts.mainmenu')
-                @yield('content')
+                @if(Auth::user()->role === 'admin')
+                        <div class="main-menu_col">
+                            <a href="{{route('transaction.arhive')}}" data-menu-id="remittances_index" class="main-menu__list">Денежные переводы</a>
+                        </div>
+                @else
+                    @include('parts.mainmenu')
+                @endif
+
+                    @yield('content')
+
             </div>
         </div>
     </main>

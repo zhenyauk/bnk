@@ -21,6 +21,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::any('transactions/arhive', 'Admin\TransactionController@arhive')->name('transaction.arhive');
     Route::any('transactions/in', 'Admin\TransactionController@getIn')->name('transaction.in');
     Route::any('transactions/out', 'Admin\TransactionController@getOut')->name('transaction.out');
+    Route::get('transactions/apply/{id}', 'Admin\TransactionController@apply')->name('transaction.apply');
 
     //Платеж
     Route::any('payment/add', 'Admin\PaymentController@addPayment')->name('payment.add');

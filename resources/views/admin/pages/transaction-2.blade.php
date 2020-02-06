@@ -9,6 +9,11 @@
                     <h2 class="overview__title">Архив денежных переводов</h2>
                 </div>
                 <div class="card card__content">
+                    @if(Auth::user()->role === 'admin')
+
+                        @else
+
+
                     <div class="card__content_blue">
                         <div class="card__list">
                             <div class="name">Счет:</div>
@@ -31,7 +36,7 @@
                         <div>
                             <div class="card__list">
                                 <div class="name">IBAN:</div>
-                                <div class="price">{{$account->iban}}</div>
+                                <div class="price">{{$account->iban ?? ''}}</div>
                             </div>
                             <div class="card__list">
                                 <div class="name">Валюта:</div>
@@ -77,6 +82,7 @@
 
                         </div>
                     </div>
+                    @endif
 
                     <div class="table table_center table_offset">
                         <div class="table__head">
@@ -86,6 +92,10 @@
                             <div class="table__head_col">Сумма</div>
                             <div class="table__head_col">Получатель</div>
                             <div class="table__head_col">Статус</div>
+                            @if(Auth::user()->role === 'admin')
+                                <div class="table__head_col">Применить оплату</div>
+                            @endif
+
                         </div>
 
 
@@ -104,7 +114,7 @@
                                 {{$item->updated_at->format('d-m-Y')}}
                             </div>
                             <div class="table__list_col table__list_col-right" >
-                                 {{$item->amount}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
+                                 {{$item->amount}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($item->account->currency_id)}}
                             </div>
                             <div class="table__list_col table__list_col-right">
                                 {{$item->payment->recipier_name ?? $item->description}}
@@ -113,6 +123,15 @@
                             <div class="table__list_col table__list_col-right">
                                 {{\App\Helpers\CurrencyHelper::getStatusName($item->status)}}
                             </div>
+                            @if(Auth::user()->role === 'admin')
+                            <div class="table__list_col table__list_col-right">
+                                @if($item->status == 4)
+                                    <a class="btn btn-success" href="{{route('transaction.apply', $item->id)}}">Применить</a>
+                                    @else
+                                    Успешно применен
+                                @endif
+                            </div>
+                            @endif
                         </div>
                         @endforeach
 

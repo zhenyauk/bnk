@@ -19,6 +19,8 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+    protected $guarded = ['role'];
+
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -51,5 +53,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(Account::class);
     }
+
+
 
 }
