@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d31f867-9760-44e4-825b-432f2979dec8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/PaymentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/PaymentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/payment/add.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/payment/add.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/payment/done.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/payment/done.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/transaction-1.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/transaction-1.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/transaction-2.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/transaction-2.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/transactions-in.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/transactions-in.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/transactions-out.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/transactions-out.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/pages/bill_detail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/pages/bill_detail.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,8 +21,38 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="131">
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="164">
+              <caret line="12" column="23" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AccountController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="786">
+              <caret line="62" column="21" lean-forward="true" selection-start-line="62" selection-start-column="21" selection-end-line="62" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/pages/bill_detail.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="416">
+              <caret line="127" selection-start-line="127" selection-end-line="127" />
+              <folding>
+                <element signature="e#5918#6110#0#HTML" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resources/views/admin/pages/transaction-1.blade.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="227">
+              <caret line="160" column="51" lean-forward="true" selection-start-line="160" selection-end-line="161" />
             </state>
           </provider>
         </entry>
@@ -60,7 +83,7 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/views/admin/pages/transaction-2.blade.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="320">
@@ -73,9 +96,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>$account</find>
-      <find>На с</find>
-      <find>Со сче</find>
       <find>Calcul</find>
       <find>step3</find>
       <find>$last_</find>
@@ -103,6 +123,9 @@
       <find>dd(</find>
       <find>iban</find>
       <find>hidde</find>
+      <find>/account</find>
+      <find>account</find>
+      <find>Входящий остаток последнего месяца:</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -150,7 +173,6 @@
         <option value="$PROJECT_DIR$/app/Exports/AccountExport.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/ExportController.php" />
         <option value="$PROJECT_DIR$/app/Exports/TransactionExport.php" />
-        <option value="$PROJECT_DIR$/resources/views/admin/pages/bill_detail.blade.php" />
         <option value="$PROJECT_DIR$/public/js/my.js" />
         <option value="$PROJECT_DIR$/resources/views/admin/pages/info.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/TransactionController.php" />
@@ -162,6 +184,7 @@
         <option value="$PROJECT_DIR$/resources/views/admin/pages/transaction-1.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/pages/transactions-in.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/admin/pages/transaction-2.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/admin/pages/bill_detail.blade.php" />
       </list>
     </option>
   </component>
@@ -402,12 +425,12 @@
       <workItem from="1580652589731" duration="34583000" />
       <workItem from="1580893546357" duration="32219000" />
       <workItem from="1580998721535" duration="2675000" />
-      <workItem from="1581020571305" duration="24041000" />
+      <workItem from="1581020571305" duration="25230000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="127320000" />
+    <option name="totallyTimeSpent" value="128509000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -614,13 +637,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Account.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="20" column="52" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Helpers/CurrencyHelper.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -689,13 +705,6 @@
         <state relative-caret-position="-96" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AccountController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="236">
-          <caret line="62" column="21" lean-forward="true" selection-start-line="62" selection-start-column="21" selection-end-line="62" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/pages/perevod.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="460">
@@ -733,24 +742,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/pages/review.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="51" column="19" lean-forward="true" selection-end-line="66" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/admin/pages/bills.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret line="48" lean-forward="true" selection-start-line="48" selection-end-line="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/pages/bill_detail.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="170" column="78" selection-start-line="170" selection-start-column="78" selection-end-line="170" selection-end-column="78" />
         </state>
       </provider>
     </entry>
@@ -768,13 +763,6 @@
           <folding>
             <element signature="e#23#62#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="131">
-          <caret line="18" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
@@ -802,13 +790,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="131">
           <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/admin/pages/transaction-1.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="150" column="58" selection-start-line="150" selection-start-column="58" selection-end-line="150" selection-end-column="58" />
         </state>
       </provider>
     </entry>
@@ -847,6 +828,51 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="320">
           <caret line="67" column="100" selection-start-line="67" selection-start-column="100" selection-end-line="67" selection-end-column="100" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Account.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="483">
+          <caret line="20" column="52" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/pages/review.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1696">
+          <caret line="53" column="45" lean-forward="true" selection-start-line="53" selection-start-column="45" selection-end-line="53" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="12" column="23" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/AccountController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="786">
+          <caret line="62" column="21" lean-forward="true" selection-start-line="62" selection-start-column="21" selection-end-line="62" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/pages/transaction-1.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="227">
+          <caret line="160" column="51" lean-forward="true" selection-start-line="160" selection-end-line="161" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/admin/pages/bill_detail.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="127" selection-start-line="127" selection-end-line="127" />
+          <folding>
+            <element signature="e#5918#6110#0#HTML" />
+          </folding>
         </state>
       </provider>
     </entry>

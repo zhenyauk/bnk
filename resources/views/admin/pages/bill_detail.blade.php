@@ -101,77 +101,32 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card__list" style="color: rgb(221, 221, 221);">
-                            <div class="name">Просроченная задолжность:</div>
-                            <div class="price">0,00 EUR</div>
-                        </div>
-                        <div class="card__list card__list_offset" style="color: rgb(221, 221, 221);">
-                            <div class="name">роцентная ставка за превышение лимита:</div>
-                            <div class="price">9,5</div>
-                        </div>
+
                         <div class="card__list">
                             <div class="name">Тип Счета:</div>
                             <div class="price">LEGAL COMMERCIAL USD</div>
                         </div>
-                        <div class="card__list" style="color: rgb(221, 221, 221);">
-                            <div class="name">Дата последнего депозита:</div>
-                            <div class="price">9/1/2020</div>
-                        </div>
-                        <div class="card__list" style="color: rgb(221, 221, 221);">
-                            <div class="name">Дата оприходования последнего процента:</div>
-                            <div class="price">27/2/2018</div>
-                        </div>
+
                         <div class="card__list">
                             <div class="name">Дата открытия счета:</div>
-                            <div class="price">20.01.2020</div>
+                            <div class="price">{{$account->created_at->format('d-m-Y')}}</div>
                         </div>
-                        <div class="card__list" style="color: rgb(221, 221, 221);">
-                            <div class="name">Дата предварительного формирования выписок:</div>
-                            <div class="price">30/11/2019</div>
-                        </div>
-                        <div class="card__list" style="color: rgb(221, 221, 221);">
-                            <div class="name">Дата последнего формирования выписок:</div>
-                            <div class="price">31/12/2019</div>
-                        </div>
+
                         <div class="card__list">
                             <div class="name">Дата последнего платежа:</div>
                             <div class="price">23.01.2020</div>
                         </div>
-                        <div class="card__list" style="color: rgb(221, 221, 221);">
-                            <div class="name">Заблокированная сумма:</div>
-                            <div class="price">1877,83 EUR</div>
-                        </div>
-                        <div class="card__list" style="color: rgb(221, 221, 221);">
-                            <div class="name">Сумма последнего депозита:</div>
-                            <div class="price">47550,59 EUR</div>
-                        </div>
-                        <div class="card__list" style="color: rgb(221, 221, 221);">
-                            <div class="name">Временный лимит:</div>
-                            <div class="price">0 EUR</div>
-                        </div>
-                        <div class="card__list" style="color: rgb(221, 221, 221);">
-                            <div class="name">Расчетный/Некапитализированный кредитовый процент:</div>
-                            <div class="price">0 EUR</div>
-                        </div>
-                        <div class="card__list" style="color: rgb(221, 221, 221);">
-                            <div class="name">Расчетный/Некапитализированный дебетовый процент:</div>
-                            <div class="price">0 EUR</div>
-                        </div>
-                        <div class="card__list" style="color: rgb(221, 221, 221);">
-                            <div class="name">Фиксированный лимит:</div>
-                            <div class="price">0 EUR</div>
-                        </div>
-                        <div class="card__list" style="color: rgb(221, 221, 221);">
-                            <div class="name">Неоплаченные чеки в сумме:</div>
-                            <div class="price">0 EUR</div>
-                        </div>
+
                     </div>
                 </div>
                 <div class="table__buttons table__buttons_offset">
                     <a class="btn" href="#" onclick="history.back()">Назад</a>
                 </div>
-                <div class="table__buttons "><a href="#" class="btn">Файл в формате Excel</a> <a href="#" class="btn">Сохранить в HTML</a> <a href="#" class="btn">Печать</a></div>
-            </div>
+                <div class="table__buttons ">
+
+                    <a class="btn" href="#" onclick="print()">Печать</a>
+
+                </div>
         </div>
     </div>
 
