@@ -11,7 +11,7 @@
                 <div class="card card__content">
                     <div class="card">
                         <div class="card__list">
-                            <form autocomplete="off" action="/transactions/out" method="get" id="from-form">
+                            <form autocomplete="off" action="{{route('transaction.out')}}" method="get" id="from-form">
                                 <div class="price-input">
                                     По фразе: <input minlength="2" class="myInput" name="search" @isset($search) value="{{$search}}" @endisset  placeholder="EB1910181528245 ">
                                 </div>

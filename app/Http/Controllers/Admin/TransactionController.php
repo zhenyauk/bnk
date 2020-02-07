@@ -87,8 +87,8 @@ class TransactionController extends Controller
 
         if($request->has('search')){
             if($request->search != null){
-                $data['search'] = trim( $request->search );
-                $transactions->where('description','like' , '%' . $data['search'] . '%');
+               // $data['search'] = trim( $request->search );
+               // $transactions->where('description','like' , '%' . trim($data['search']) . '%');
             }
         }
 
@@ -153,7 +153,8 @@ class TransactionController extends Controller
 
     public function makeDate($date)
     {
-        return Carbon::createFromFormat('d/m/Y', $date);
+        $dt = Carbon::createFromFormat('d/m/Y', $date);
+        return $dt->toDateString();
     }
 
 
