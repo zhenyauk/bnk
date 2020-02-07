@@ -39,12 +39,12 @@
                             <div class="name">Валюта:</div>
                             <div class="price">{{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}</div>
                         </div>
-                        <div class="card__list-title" style="color: rgb(221, 221, 221);"><span>Владелец:</span></div>
-                        <div class="card__list" style="color: rgb(221, 221, 221);">
+                        <div class="card__list-title"  ><span>Владелец:</span></div>
+                        <div class="card__list"  >
                             <div class="name">Основной владелец:</div>
                             <div class="price">JETLUX LTD</div>
                         </div>
-                        <div class="card__list" style="color: rgb(221, 221, 221);">
+                        <div class="card__list"  >
                             <div class="name">Debit Interest Rate:0</div>
                             <div class="price"></div>
                         </div>
@@ -65,7 +65,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card__list" style="color: rgb(221, 221, 221);">
+                        <div class="card__list" >
                             <div class="name">Исходящий остаток:</div>
                             <div class="price">6 273,99 EUR</div>
                         </div>
@@ -101,32 +101,52 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="card__list" >
+                            <div class="name">Просроченная задолжность:</div>
+                            <div class="price">0,00 EUR</div>
+                        </div>
+                        <div class="card__list card__list_offset" >
+                            <div class="name">процентная ставка за превышение лимита:</div>
+                            <div class="price">9,5</div>
+                        </div>
                         <div class="card__list">
                             <div class="name">Тип Счета:</div>
                             <div class="price">LEGAL COMMERCIAL USD</div>
                         </div>
-
+                        <div class="card__list" >
+                            <div class="name">Дата последнего депозита:</div>
+                            <div class="price">9/1/2020</div>
+                        </div>
+                        <!--
+                        <div class="card__list" >
+                            <div class="name">Дата оприходования последнего процента:</div>
+                            <div class="price">27/2/2018</div>
+                        </div>
+                        -->
                         <div class="card__list">
                             <div class="name">Дата открытия счета:</div>
                             <div class="price">{{$account->created_at->format('d-m-Y')}}</div>
                         </div>
-
+                        <!--
+                        <div class="card__list" >
+                            <div class="name">Дата предварительного формирования выписок:</div>
+                            <div class="price">30/11/2019</div>
+                        </div>
+                        <div class="card__list" >
+                            <div class="name">Дата последнего формирования выписок:</div>
+                            <div class="price">31/12/2019</div>
+                        </div>
                         <div class="card__list">
                             <div class="name">Дата последнего платежа:</div>
                             <div class="price">23.01.2020</div>
                         </div>
+                        -->
 
                     </div>
                 </div>
-                <div class="table__buttons table__buttons_offset">
-                    <a class="btn" href="#" onclick="history.back()">Назад</a>
-                </div>
-                <div class="table__buttons ">
-
-                    <a class="btn" href="#" onclick="print()">Печать</a>
-
-                </div>
+                <div class="table__buttons table__buttons_offset"><a href="#" class="btn">Назад</a></div>
+                <div class="table__buttons "><a href="#" class="btn">Файл в формате Excel</a> <a href="#" class="btn">Сохранить в HTML</a> <a href="#" class="btn">Печать</a></div>
+            </div>
         </div>
     </div>
 
