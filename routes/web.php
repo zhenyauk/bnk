@@ -24,6 +24,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::any('transactions/out', 'Admin\TransactionController@getOut')->name('transaction.out');
     Route::get('transactions/apply/{id}', 'Admin\TransactionController@apply')->name('transaction.apply');
 
+    Route::any('transactions/incoming', 'Admin\TransactionController@adminIn')->name('transaction.income');
+
+
     Route::get('transactions/info/{id}', 'Admin\TransactionController@info')->name('transaction.info');
 
     Route::view('transactions/about', 'admin.pages.perevod')->name('page.transaction.about');

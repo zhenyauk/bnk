@@ -63,6 +63,7 @@ class PaymentController extends Controller
 
     }
 
+    #finishing step3
     public function step3(Request $request)
     {
 
@@ -77,12 +78,13 @@ class PaymentController extends Controller
             return abort('403');
 
 
+        $comision = CurrencyHelper::getComission(session('form_data.comision'), session('form_data.amount'));
+
 
         if($acc->currency_id != 2){
-            $comision = CurrencyHelper::Calculate(session('form_data.amount'), $acc->currency_id, 2);
+            $comision = CurrencyHelper::Calculate($comision, $acc->currency_id, 2);
         }
-
-
+        
 
         //Создать платеж
         $payment = new Payment();

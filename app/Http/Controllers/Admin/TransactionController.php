@@ -36,6 +36,18 @@ class TransactionController extends Controller
         return view('admin.pages.transaction-2', $data);
     }
 
+    public function adminIn()
+    {
+        $accounts = Account::get();
+
+        $data['transactions'] = Transaction::orderBy('created_at','desc')->paginate($this->per_page);
+        $data['trans'] = Transaction::orderBy('id', 'desc')->first();
+        $data['accounts'] = $accounts;
+        $data['account'] = $account ?? '';
+
+        return view('admin.pages.transaction-2', $data);
+    }
+
     public function paymentsAll(Request $request)
     {
         $data = $this->getTransactions($request);
