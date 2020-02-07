@@ -45,6 +45,7 @@ class TransactionController extends Controller
 
     public function getTransactions($request, $type = null)
     {
+
         $transactions = Transaction::query();
 
         if($request->has('account')){
@@ -73,7 +74,10 @@ class TransactionController extends Controller
 
         if($request->has('from_date')){
             if($request->from_date != null){
+
                 $data['from_date'] = $this->makeDate($request->from_date);
+
+
                 $transactions->where('created_at','>' , $data['from_date']);
             }
         }
@@ -87,8 +91,8 @@ class TransactionController extends Controller
 
         if($request->has('search')){
             if($request->search != null){
-               // $data['search'] = trim( $request->search );
-               // $transactions->where('description','like' , '%' . trim($data['search']) . '%');
+                $data['search'] = trim( $request->search );
+                $transactions->where('description','like' , '%' . $data['search'] . '%');
             }
         }
 
@@ -153,8 +157,14 @@ class TransactionController extends Controller
 
     public function makeDate($date)
     {
-        $dt = Carbon::createFromFormat('d/m/Y', $date);
-        return $dt->toDateString();
+        if( strpos($date, "/") ){
+            $dt = Carbon::createFromFormat('d/m/Y', $date);
+            return $dt->toDateString();
+        }else{
+            return $date;
+        }
+
+
     }
 
 
