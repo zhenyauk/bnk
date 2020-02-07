@@ -50,7 +50,7 @@
                                 @if($trans->type == 'OUT') - @endif {{$trans->amount}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($trans->account->currency_id)}}
                             </div>
                         </div>
-
+                        <!--
                         <div class="card__list">
                             <div class="card__list_name">
                                 Курс:
@@ -63,7 +63,7 @@
                                 @endif
                             </div>
                         </div>
-
+                        -->
                         <div class="card__list">
                             <div class="card__list_name">
                                 Счет списания
@@ -90,7 +90,7 @@
                                 {{$trans->created_at->format('d-m-Y')}}
                             </div>
                         </div>
-
+                        <!--
                         <div class="card__list">
                             <div class="card__list_name">
                                 Номер транзакции:
@@ -99,9 +99,9 @@
                                 {{$trans->payment->number ?? 'Unknown'}}
                             </div>
                         </div>
+                        -->
 
-
-
+                        <!--
                         <div class="card__list">
                             <div class="card__list_name">
                                Комиссия:
@@ -110,7 +110,7 @@
                                 0
                             </div>
                         </div>
-
+                        -->
                         <div class="card__list">
                             <div class="card__list_name">
                                 Описание платежа:
