@@ -110,7 +110,7 @@
                         <div class="table__list ">
                             <div class="table__list_col">
                                 <input type="radio" name="table">
-                                <a href="overview-t1-d.html">
+                                <a href="{{route('transaction.info', $item->id)}}">
                                    Денежный перевод
                                 </a>
                             </div>
