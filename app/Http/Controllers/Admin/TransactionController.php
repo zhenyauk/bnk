@@ -87,7 +87,7 @@ class TransactionController extends Controller
 
         if($request->has('search')){
             if($request->search != null){
-                $data['search'] = $request->search;
+                $data['search'] = trim( $request->search );
                 $transactions->where('description','like' , '%' . $request->search . '%');
             }
         }
@@ -132,7 +132,7 @@ class TransactionController extends Controller
 
         if($request->has('search')){
             if($request->search != null){
-                $data['search'] = $request->search;
+                $data['search'] =  trim( $request->search );
                 $transactions->where('description','like' , '%' . $request->search . '%');
             }
         }
