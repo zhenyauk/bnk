@@ -115,30 +115,30 @@
                             </div>
                         </div>
                         @isset($transactions)
-                        @foreach($transactions as $item)
-                            <div class="table__list @if($loop->iteration % 2) table__list-gray @endif">
-                            <div class="table__list_col">
-                                <input type="radio" name="table">
-                                <a href="{{route('transaction.info', $item->id)}}">{{$item->created_at->format('d-m-Y')}} </a>
-                            </div>
-                            <div class="table__list_col table__list_col-center">
-                               {{$item->type}}
-                            </div>
-                            <div class="table__list_col table__list_col-right" @if($item->type === 'OUT') style="color:red" @endif>
-                              @if($item->type === 'OUT') - @endif {{$item->amount}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
-                            </div>
-                            <div class="table__list_col table__list_col-right">
-                               {{$item->balance}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
-                            </div>
-                            <div class="table__list_col table__list_col-right">
-                                <a href="{{route('transaction.info', $item->id)}}"> {{$item->created_at->format('d-m-Y')}}</a>
-                            </div>
-                            <div class="table__list_col table__list_col-right">
-                                <a href="{{route('transaction.info', $item->id)}}"> {!! $item->description !!}</a>
-                            </div>
+                            @foreach($transactions as $item)
+                                <div class="table__list @if($loop->iteration % 2) table__list-gray @endif">
+                                <div class="table__list_col">
+                                    <input type="radio" name="table">
+                                    <a href="{{route('transaction.info', $item->id)}}">{{$item->created_at->format('d-m-Y')}} </a>
+                                </div>
+                                <div class="table__list_col table__list_col-center">
+                                   {{$item->type}}
+                                </div>
+                                <div class="table__list_col table__list_col-right" @if($item->type === 'OUT') style="color:red" @endif>
+                                  @if($item->type === 'OUT') - @endif {{$item->amount}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
+                                </div>
+                                <div class="table__list_col table__list_col-right">
+                                   {{$item->balance}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
+                                </div>
+                                <div class="table__list_col table__list_col-right">
+                                    <a href="{{route('transaction.info', $item->id)}}"> {{$item->created_at->format('d-m-Y')}}</a>
+                                </div>
+                                <div class="table__list_col table__list_col-right">
+                                    <a href="{{route('transaction.info', $item->id)}}"> {!! $item->description !!}</a>
+                                </div>
 
-                        </div>
-                        @endforeach
+                            </div>
+                            @endforeach
                         @endisset
 
 
@@ -147,21 +147,15 @@
                     <div class="pagination pagination_offset">
                         {{$transactions->links()}}
                     </div>
-
                 </div>
-
-
-
 
                 <div class="table__buttons table__buttons_offset">
                     <a class="btn" href="#" onclick="history.back()">Назад</a>
-                    <a class="btn" href="overview-t1-dt-2.html">Детали</a>
                 </div>
                 <div class="table__buttons ">
                     @if(Auth::user()->role !== 'admin')
                         <a class="btn" href="{{route('export.trans', $account->id)}}" >Файл в формате Excel</a>
                     @endif
-                    <a class="btn" href="{{$_SERVER['REQUEST_URI']}}" download>Сохранить в HTML</a>
 
                     <a class="btn" href="#" onclick="print()">Печать</a>
                 </div>

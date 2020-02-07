@@ -16,14 +16,7 @@
                 <div class="card card__content card__content_center">
 
                     <div class="card__content_row">
-                        <div class="card__list">
-                            <div class="card__list_name">
-                                Счет
-                            </div>
-                            <div class="card__list_price">
-                                {{$trans->account->number}}
-                            </div>
-                        </div>
+
                         <div class="card__list">
                             <div class="card__list_name">
                                 Account IBAN:
@@ -57,18 +50,70 @@
                                 @if($trans->type == 'OUT') - @endif {{$trans->amount}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($trans->account->currency_id)}}
                             </div>
                         </div>
+
                         <div class="card__list">
                             <div class="card__list_name">
-                               Комиссия:
+                                Курс:
                             </div>
                             <div class="card__list_price color color_red">
-                                Unknown
+                                @if(\App\Helpers\CurrencyHelper::getCurrencyCode($trans->account->currency_id) == 'EUR')
+                                    {{\App\Helpers\CurrencyHelper::$eur}}
+                                @else
+                                    {{\App\Helpers\CurrencyHelper::$eur}}
+                                @endif
                             </div>
                         </div>
 
                         <div class="card__list">
                             <div class="card__list_name">
-                                Комментарии:
+                                Счет списания
+                            </div>
+                            <div class="card__list_price">
+                                {{$trans->account->number}}
+                            </div>
+                        </div>
+
+                        <div class="card__list">
+                            <div class="card__list_name">
+                                Счет комиссионых выплат
+                            </div>
+                            <div class="card__list_price">
+                                {{$trans->account->number}}
+                            </div>
+                        </div>
+
+                        <div class="card__list">
+                            <div class="card__list_name">
+                               Дата валютирования
+                            </div>
+                            <div class="card__list_price">
+                                {{$trans->created_at->format('d-m-Y')}}
+                            </div>
+                        </div>
+
+                        <div class="card__list">
+                            <div class="card__list_name">
+                                Номер транзакции:
+                            </div>
+                            <div class="card__list_price">
+                                {{$trans->payment->number ?? 'Unknown'}}
+                            </div>
+                        </div>
+
+
+
+                        <div class="card__list">
+                            <div class="card__list_name">
+                               Комиссия:
+                            </div>
+                            <div class="card__list_price color color_red">
+                                0
+                            </div>
+                        </div>
+
+                        <div class="card__list">
+                            <div class="card__list_name">
+                                Описание платежа:
                             </div>
                             <div class="card__list_price" style="max-width: 400px;">
                                 {{$trans->description}}
@@ -86,11 +131,10 @@
                     <a class="btn" href="#" onclick="history.back()">Назад</a>
                 </div>
                 <div class="table__buttons ">
-                    <a class="btn" download="" href="#">Файл в формате Excel</a>
 
-                    <a class="btn" download="" href="#">Сохранить в HTML</a>
 
-                    <a class="btn" href="#">Печать</a>
+
+                    <a class="btn" href="#" onclick="print()">Печать</a>
                 </div>
 
             </div>

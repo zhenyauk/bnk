@@ -49,6 +49,21 @@ $( document ).ready(function() {
 
 
 
+    $('.clicker').click(function () {
+        $('.clicker').prop("checked", false);
+        $(this).prop("checked", true);
+        $('#num_id').val( $(this).attr('data-val') );
+    });
+    
+    $('#op_go').click(function (e) {
+        e.preventDefault();
+        if( $('#num_id').val() != '' ){
+            location.href="/transactions/info/" + $('#num_id').val();
+        }
+    });
+
+
+
 
 
 

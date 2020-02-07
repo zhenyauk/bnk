@@ -35,14 +35,14 @@
 
                                 <div class="table__head_col">#</div>
                                 <div class="table__head_col">Дата валютирования</div>
-                                <div class="table__head_col">Назначение банк</div>
+
                                 <div class="table__head_col">Референс</div>
                                 <div class="table__head_col">Сумма зачисления</div>
                                 <div class="table__head_col">Тип платежа</div>
-                                <div class="table__head_col">Информация о получателе</div>
                                 <div class="table__head_col">Детали платежа</div>
 
                             </div>
+                            <input type="hidden" value="" id="num_id">
                             @foreach($transactions as $item)
                                 <div class="table__list ">
 
@@ -52,11 +52,9 @@
                                         </a>
                                     </div>
                                     <div class="table__list_col table__list_col-center">
-                                        <a href="{{route('transaction.info', $item->id)}}">{{$item->created_at->format('d-m-Y') ?? ''}}</a>
+                                        <input data-val="{{$item->id}}" type="radio" class="clicker"> <a href="{{route('transaction.info', $item->id)}}">{{$item->created_at->format('d-m-Y') ?? ''}}</a>
                                     </div>
-                                    <div class="table__list_col table__list_col-right" >
 
-                                    </div>
 
                                     <div class="table__list_col table__list_col-right">
 
@@ -70,9 +68,7 @@
                                        {{ $item->type  }}
                                     </div>
 
-                                    <div class="table__list_col table__list_col-right">
 
-                                    </div>
 
                                     <div class="table__list_col table__list_col-right">
                                         <a href="{{route('transaction.info', $item->id)}}">
@@ -88,14 +84,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="table__buttons table__buttons_offset"><a href="#" onclick="history.back()" class="btn">Назад</a></div>
+                <div class="table__buttons table__buttons_offset">
+                    <a href="#" onclick="history.back()" class="btn">Назад</a>
+                </div>
 
 
                 <div class="table__buttons ">
+                    <a class="btn" href="#" id="op_go">Описание</a>
                     @if(Auth::user()->role !== 'admin')
                         <a class="btn" href="{{route('export.trans.out', $account->id)}}" >Файл в формате Excel</a>
                     @endif
-                    <a class="btn" href="{{$_SERVER['REQUEST_URI']}}" download>Сохранить в HTML</a>
+
 
                     <a class="btn" href="#" onclick="print()">Печать</a>
 

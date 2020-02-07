@@ -73,7 +73,7 @@
                     @if(Auth::user()->role !== 'admin')
                         <a class="btn" href="{{route('export.trans.in', $account->id)}}" >Файл в формате Excel</a>
                     @endif
-                    <a class="btn" href="{{$_SERVER['REQUEST_URI']}}" download>Сохранить в HTML</a>
+
 
                     <a class="btn" href="#" onclick="print()">Печать</a>
 
