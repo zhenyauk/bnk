@@ -118,7 +118,7 @@
                             @foreach($transactions as $item)
                                 <div class="table__list @if($loop->iteration % 2) table__list-gray @endif">
                                 <div class="table__list_col">
-                                    <input type="radio" name="table">
+                                    <input data-val="{{$item->id}}" type="radio" class="clicker">
                                     <a href="{{route('transaction.info', $item->id)}}">{{$item->created_at->format('d-m-Y')}} </a>
                                 </div>
                                 <div class="table__list_col table__list_col-center">
@@ -148,8 +148,9 @@
                         {{$transactions->links()}}
                     </div>
                 </div>
-
+                <input type="hidden" value="" id="num_id">
                 <div class="table__buttons table__buttons_offset">
+                    <a class="btn" href="#" id="op_go">Описание</a>
                     <a class="btn" href="#" onclick="history.back()">Назад</a>
                 </div>
                 <div class="table__buttons ">

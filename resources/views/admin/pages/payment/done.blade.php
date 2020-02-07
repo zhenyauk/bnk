@@ -10,7 +10,7 @@
             <div class="col col--lg-12">
                 <div class="table-block blue" style="width: 100%">
                     <div class="table-row">
-                       Готово! Ваш плетеж добавлен
+                       Готово! Ваш платеж добавлен
                     </div>
                 </div>
 

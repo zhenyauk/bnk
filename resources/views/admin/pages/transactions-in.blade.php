@@ -42,11 +42,13 @@
                             @foreach($transactions as $item)
                                 <div class="table__list ">
                                     <div class="table__list_col">
-                                        <a href="overview-t1-d.html">
+                                        <input data-val="{{$item->id}}" type="radio" class="clicker">
+
                                            {{$loop->iteration}}
-                                        </a>
+
                                     </div>
                                     <div class="table__list_col table__list_col-center">
+                                        <input data-val="{{$item->id}}" type="radio" class="clicker">
                                         <a href="{{route('transaction.info', $item->id)}}"> {{$item->created_at->format('d-m-Y') ?? ''}} </a>
                                     </div>
                                     <div class="table__list_col table__list_col-right" @if($item->type === 'OUT') style="color:red" @endif>
@@ -68,8 +70,9 @@
                 </div>
                 <div class="table__buttons table__buttons_offset"><a href="#" class="btn">Назад</a></div>
 
-
+                <input type="hidden" value="" id="num_id">
                 <div class="table__buttons ">
+                    <a class="btn" href="#" id="op_go">Подробнее</a>
                     @if(Auth::user()->role !== 'admin')
                         <a class="btn" href="{{route('export.trans.in', $account->id)}}" >Файл в формате Excel</a>
                     @endif

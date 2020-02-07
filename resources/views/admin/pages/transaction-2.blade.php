@@ -65,7 +65,7 @@
                             <div class="card__list">
                                 <div class="name">Критерий поиска:</div>
                                 <div class="price price_row">
-                                    <form autocomplete="off" action="/transactions" method="get" id="from-form">
+                                    <form autocomplete="off" action="{{route('transaction.arhive')}}" method="get" id="from-form">
                                         <div class="price-input">
                                             По фразе: <input minlength="2" class="myInput" name="search" @isset($search) value="{{$search}}" @endisset  placeholder="EB1910181528245 ">
                                         </div>
@@ -109,7 +109,7 @@
                             @endif
                         <div class="table__list ">
                             <div class="table__list_col">
-                                <input type="radio" name="table">
+                                <input data-val="{{$item->id}}" type="radio" class="clicker">
                                 <a href="{{route('transaction.info', $item->id)}}">
                                    Денежный перевод
                                 </a>
@@ -153,8 +153,9 @@
                     </div>
                 </div>
 
-
+                <input type="hidden" value="" id="num_id">
                 <div class="table__buttons ">
+                    <a class="btn" href="#" id="op_go">Описание</a>
                     @if(Auth::user()->role !== 'admin')
                         <a class="btn" href="{{route('export.trans.out', $account->id)}}" >Файл в формате Excel</a>
                     @endif

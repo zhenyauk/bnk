@@ -94,7 +94,7 @@
 
                         <div class="textarea__item">
                             <div class="textarea-block">IBAN/Счет Получателя*</div>
-                            <input type="number"  required name="iban" class="form-control">
+                            <input type="text"  required name="iban" class="form-control">
                         </div>
 
                         <div class="textarea__item">

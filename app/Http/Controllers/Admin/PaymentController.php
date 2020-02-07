@@ -84,7 +84,7 @@ class PaymentController extends Controller
         if($acc->currency_id != 2){
             $comision = CurrencyHelper::Calculate($comision, $acc->currency_id, 2);
         }
-        
+
 
         //Создать платеж
         $payment = new Payment();

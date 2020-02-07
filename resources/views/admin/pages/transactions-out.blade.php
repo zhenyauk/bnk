@@ -53,7 +53,9 @@
                                         </a>
                                     </div>
                                     <div class="table__list_col table__list_col-center">
-                                        <input data-val="{{$item->id}}" type="radio" class="clicker"> <a href="{{route('transaction.info', $item->id)}}">{{$item->created_at->format('d-m-Y') ?? ''}}</a>
+                                        <input data-val="{{$item->id}}" type="radio" class="clicker">
+                                        <a href="{{route('transaction.info', $item->id)}}">{{$item->created_at->format('d-m-Y') ?? ''}}
+                                        </a>
                                     </div>
 
 
