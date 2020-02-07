@@ -68,7 +68,7 @@
                                     </div>
 
                                     <div class="table__list_col table__list_col-right">
-                                       {{ $item->type  }}
+                                       {{-- $item->type  --}} OUR
                                     </div>
 
 

@@ -43,7 +43,7 @@
                 </div>
 
                 <div class="table__buttons table__buttons_offset">
-                    <a class="btn" href="/transactions/arhive" >Движение средств по счету</a>
+                    <a class="btn" href="/transactions" >Движение средств по счету</a>
 
                     <a class="btn" href="/account" >Детали счета</a>
 
