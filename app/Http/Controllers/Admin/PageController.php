@@ -9,6 +9,6 @@ class PageController extends Controller
 {
     public function trasactionAbout()
     {
-        return view('');
+        //return view('');
     }
 }

@@ -35,3 +35,9 @@
 
 
 @stop
+
+
+
+@section('menu')
+    {!! \App\Helpers\_Helper::getMenu('second') !!}
+@stop

@@ -119,7 +119,7 @@
                             <div class="table__list @if($loop->iteration % 2) table__list-gray @endif">
                             <div class="table__list_col">
                                 <input type="radio" name="table">
-                                <a href="overview-t1-d.html"> {{$item->created_at->format('d-m-Y')}} </a>
+                                <a href="{{route('transaction.info', $item->id)}}">{{$item->created_at->format('d-m-Y')}} </a>
                             </div>
                             <div class="table__list_col table__list_col-center">
                                {{$item->type}}
@@ -131,10 +131,10 @@
                                {{$item->balance}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($account->currency_id)}}
                             </div>
                             <div class="table__list_col table__list_col-right">
-                               {{$item->created_at->format('d-m-Y')}}
+                                <a href="{{route('transaction.info', $item->id)}}"> {{$item->created_at->format('d-m-Y')}}</a>
                             </div>
                             <div class="table__list_col table__list_col-right">
-                                {!! $item->description !!}
+                                <a href="{{route('transaction.info', $item->id)}}"> {!! $item->description !!}</a>
                             </div>
 
                         </div>
@@ -154,15 +154,16 @@
 
 
                 <div class="table__buttons table__buttons_offset">
-                    <a class="btn" href="#">Назад</a>
+                    <a class="btn" href="#" onclick="history.back()">Назад</a>
                     <a class="btn" href="overview-t1-dt-2.html">Детали</a>
                 </div>
                 <div class="table__buttons ">
-                    <a class="btn" download="" href="#">Файл в формате Excel</a>
+                    @if(Auth::user()->role !== 'admin')
+                        <a class="btn" href="{{route('export.trans', $account->id)}}" >Файл в формате Excel</a>
+                    @endif
+                    <a class="btn" href="{{$_SERVER['REQUEST_URI']}}" download>Сохранить в HTML</a>
 
-                    <a class="btn" download="" href="#">Сохранить в HTML</a>
-
-                    <a class="btn" href="#">Печать</a>
+                    <a class="btn" href="#" onclick="print()">Печать</a>
                 </div>
 
             </div>

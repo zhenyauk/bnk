@@ -47,13 +47,13 @@
                                         </a>
                                     </div>
                                     <div class="table__list_col table__list_col-center">
-                                        {{$item->created_at->format('d-m-Y') ?? ''}}
+                                        <a href="{{route('transaction.info', $item->id)}}"> {{$item->created_at->format('d-m-Y') ?? ''}} </a>
                                     </div>
                                     <div class="table__list_col table__list_col-right" @if($item->type === 'OUT') style="color:red" @endif>
                                         @if($item->type === 'OUT') - @endif {{$item->amount}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($item->account->currency_id)}}
                                     </div>
                                     <div class="table__list_col table__list_col-right">
-                                        {{$item->description}}
+                                        <a href="{{route('transaction.info', $item->id)}}"> {{$item->description}} </a>
                                     </div>
 
 
@@ -67,7 +67,18 @@
                     </div>
                 </div>
                 <div class="table__buttons table__buttons_offset"><a href="#" class="btn">Назад</a></div>
-                <div class="table__buttons "><a href="#" class="btn">Файл в формате Excel</a> <a download="" href="#" class="btn">Сохранить в HTML</a> <a href="#" class="btn">Печать</a></div>
+
+
+                <div class="table__buttons ">
+                    @if(Auth::user()->role !== 'admin')
+                        <a class="btn" href="{{route('export.trans.in', $account->id)}}" >Файл в формате Excel</a>
+                    @endif
+                    <a class="btn" href="{{$_SERVER['REQUEST_URI']}}" download>Сохранить в HTML</a>
+
+                    <a class="btn" href="#" onclick="print()">Печать</a>
+
+                </div>
+
             </div>
         </div>
     </div>

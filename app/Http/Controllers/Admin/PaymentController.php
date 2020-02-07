@@ -157,7 +157,7 @@ class PaymentController extends Controller
 
         if((int) $request->currency_id != $account->currency_id){
             $amount = CurrencyHelper
-                ::Calculate($request->amount, $request->currency_id, $account->currency);
+                ::Calculate($request->amount, $request->currency_id, $account->currency_id);
         }else{
             $amount = $request->amount;
         }
@@ -171,6 +171,10 @@ class PaymentController extends Controller
         $trans->status = 1;
         $trans->balance = $last_trans->balance + $amount;
         $trans->save();
+
+        $account->balance_current = $account->balance_current + $amount;
+        $account->save();
+
         return view('admin.pages.payment.done');
     }
 

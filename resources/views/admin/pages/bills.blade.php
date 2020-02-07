@@ -43,16 +43,18 @@
                 </div>
 
                 <div class="table__buttons table__buttons_offset">
-                    <a class="btn" href="#" v-on:click.prevent="forwardToTransactions()">Движение средств по счету</a>
+                    <a class="btn" href="/transactions/arhive" >Движение средств по счету</a>
 
-                    <a class="btn" href="#" v-on:click.prevent="forwardToDetails()">Детали счета</a>
-                    <a class="btn" href="#" v-on:click.prevent="forwardToStatements()">Account Statements</a>
+                    <a class="btn" href="/account" >Детали счета</a>
+
+                    <a class="btn" href="/transactions/out" >Account Statements</a>
                 </div>
                 <div class="table__buttons ">
-                    <a class="btn" href="#" v-on:click.prevent="downloadCSV()">Файл в формате Excel</a>
+                    <a class="btn" href="/export/accounts" >Файл в формате Excel</a>
 
-                    <a class="btn" href="#" v-on:click.prevent="downloadHTML()">Сохранить в HTML</a>
-                    <a class="btn" href="#">Печать</a>
+                    <a class="btn" href="{{$_SERVER['REQUEST_URI']}}" download>Сохранить в HTML</a>
+
+                    <a class="btn" href="#" onclick="print()">Печать</a>
                 </div>
 
             </div>

@@ -10,7 +10,7 @@
             <div class="col col--lg-12">
                 <div class="table-block blue" style="width: 100%">
                     <div class="table-row">
-                       Готово! Ваш плетеж отправлен в обработку
+                       Готово! Ваш плетеж добавлен
                     </div>
                 </div>
 

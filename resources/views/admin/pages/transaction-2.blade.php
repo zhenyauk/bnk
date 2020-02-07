@@ -1,5 +1,9 @@
 @extends('layouts.cabinet')
 
+@section('title')
+    Архив денежных переводов
+@stop
+
 @section('content')
 
     <div class="main-content main-content_height portfolio" style="height:600px; overflow: scroll ">
@@ -100,6 +104,9 @@
 
 
                         @foreach($transactions as $item)
+                            @if($item->type === 'IN')
+                                @continue
+                            @endif
                         <div class="table__list ">
                             <div class="table__list_col">
                                 <input type="radio" name="table">
@@ -108,16 +115,16 @@
                                 </a>
                             </div>
                             <div class="table__list_col table__list_col-center">
-                                {{$item->created_at->format('d-m-Y')}}
+                                <a href="{{route('transaction.info', $item->id)}}">   {{$item->created_at->format('d-m-Y')}} </a>
                             </div>
                             <div class="table__list_col table__list_col-right" >
-                                {{$item->updated_at->format('d-m-Y')}}
+                                <a href="{{route('transaction.info', $item->id)}}"> {{$item->updated_at->format('d-m-Y')}} </a>
                             </div>
                             <div class="table__list_col table__list_col-right" >
                                  {{$item->amount}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($item->account->currency_id)}}
                             </div>
                             <div class="table__list_col table__list_col-right">
-                                {{$item->payment->recipier_name ?? $item->description}}
+                                <a href="{{route('transaction.info', $item->id)}}">  {{$item->payment->recipier_name ?? $item->description}}</a>
                             </div>
 
                             <div class="table__list_col table__list_col-right">
@@ -145,8 +152,20 @@
                         {{ $transactions->links() }}
                     </div>
                 </div>
-                <div class="table__buttons table__buttons_offset"><a href="#" class="btn">Назад</a></div>
-                <div class="table__buttons "><a href="#" class="btn">Details</a> <a href="#" class="btn">Файл в формате Excel</a> <a href="#" class="btn">Сохранить в HTML</a> <a href="#" class="btn">Печать</a></div>
+
+
+                <div class="table__buttons ">
+                    @if(Auth::user()->role !== 'admin')
+                        <a class="btn" href="{{route('export.trans.out', $account->id)}}" >Файл в формате Excel</a>
+                    @endif
+                    <a class="btn" href="{{$_SERVER['REQUEST_URI']}}" download>Сохранить в HTML</a>
+
+                    <a class="btn" href="#" onclick="print()">Печать</a>
+
+                </div>
+
+
+
             </div>
         </div>
     </div>

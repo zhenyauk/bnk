@@ -19,9 +19,12 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::any('transactions', 'Admin\TransactionController@index')->name('transaction.show');
     Route::any('transactions/arhive', 'Admin\TransactionController@arhive')->name('transaction.arhive');
+    Route::any('transactions/all', 'Admin\TransactionController@paymentsAll')->name('transaction.all');
     Route::any('transactions/in', 'Admin\TransactionController@getIn')->name('transaction.in');
     Route::any('transactions/out', 'Admin\TransactionController@getOut')->name('transaction.out');
     Route::get('transactions/apply/{id}', 'Admin\TransactionController@apply')->name('transaction.apply');
+
+    Route::get('transactions/info/{id}', 'Admin\TransactionController@info')->name('transaction.info');
 
     Route::view('transactions/about', 'admin.pages.perevod')->name('page.transaction.about');
 
@@ -41,7 +44,17 @@ Route::group(['middleware' => 'auth'], function(){
 
 
 
-    Route::any('test', 'TestController@index')->name('test');;
+    Route::any('test', 'TestController@index')->name('test');
+
+    # Export
+    Route::get('export/trans/{id}', 'Admin\ExportController@transactions')->name('export.trans');
+    Route::get('export/trans/{id}/in', 'Admin\ExportController@transactionsIn')->name('export.trans.in');
+    Route::get('export/trans/{id}/out', 'Admin\ExportController@transactionsOut')->name('export.trans.out');
+
+
+    Route::get('export/accounts', 'Admin\ExportController@accounts')->name('export.accounts');
+
+
 
 
 

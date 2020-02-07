@@ -36,12 +36,25 @@
 
                 </div>
 
-                <div class="table__buttons">
-                    <a class="btn" href="#">Файл в формате Excel</a>
+                <!--
 
-                    <a class="btn" href="#">Сохранить в HTML</a>
+                        <div class="table__buttons ">
+                            <a href="#" class="btn">Движение средств по счету</a>
+                            <a href="#" class="btn">Детали счета</a>
+                            <a href="#" class="btn">Account Statements</a>
+                        </div>
+                        <div class="table__buttons ">
+                            <a href="http://bnk/transactions/arhive" download class="btn">Сохранить в формате Excell</a>
+                            <a href="http://bnk/transactions/arhive" download class="btn">Сохранить в HTML</a>
+                            <a href="#" class="btn">Печать</a>
+                        </div>
 
-                    <a class="btn" href="#">Печать</a>
+                -->
+
+                <div class="table__buttons ">
+                    <a href="{{route('export.accounts')}}"  class="btn">Сохранить в формате Excell</a>
+                    <a href="http://bnk/accounts" download class="btn">Сохранить в HTML</a>
+                    <a href="#" class="btn"  onclick="print()">Печать</a>
                 </div>
 
             </div>

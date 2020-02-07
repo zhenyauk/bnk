@@ -25,7 +25,7 @@
                     <a href="/dashboard">
                         <img src="/images/home.gif" alt="">
                     </a>
-                    <a href="#">
+                    <a href="/sitemap">
                         <img src="/images/sitemap1.gif" alt="">
                     </a>
                     <a href="/logout" class="logout-btn"><img src="/images/exit.gif" alt=""></a>
@@ -57,6 +57,7 @@
                 @if(Auth::user()->role === 'admin')
                         <div class="main-menu_col">
                             <a href="{{route('transaction.arhive')}}" data-menu-id="remittances_index" class="main-menu__list">Денежные переводы</a>
+                            <a href="{{route('transaction.in')}}" data-menu-id="remittances_index" class="main-menu__list">Входящие платежи</a>
                             <a href="{{route('payment.create')}}" data-menu-id="remittances_index" class="main-menu__list">Создать платеж</a>
                         </div>
 

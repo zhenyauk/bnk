@@ -36,6 +36,12 @@ class TransactionController extends Controller
         return view('admin.pages.transaction-2', $data);
     }
 
+    public function paymentsAll(Request $request)
+    {
+        $data = $this->getTransactions($request);
+        return view('admin.pages.payment.payment-all', $data);
+    }
+
 
     public function getTransactions($request, $type = null)
     {
@@ -90,7 +96,7 @@ class TransactionController extends Controller
             $transactions->where('type' , $type);
         }
 
-        $data['transactions'] = $transactions->whereType('OUT')->orderBy('created_at','desc')->paginate($this->per_page);
+        $data['transactions'] = $transactions->orderBy('created_at','desc')->paginate($this->per_page);
         $data['trans'] = Transaction::orderBy('id', 'desc')->first();
         $data['accounts'] = $accounts;
         $data['account'] = $account ?? '';
@@ -135,7 +141,7 @@ class TransactionController extends Controller
             $transactions->where('type' , $type);
         }
 
-        $data['transactions'] = $transactions->paginate($this->per_page);
+        $data['transactions'] = $transactions->orderBy('created_at', 'desc')->paginate($this->per_page);
 
 
         $data['trans'] = Transaction::orderBy('id', 'desc')->first();
@@ -160,6 +166,19 @@ class TransactionController extends Controller
             return back();
         }
         return abort('403');
+    }
+
+
+    // Подробная информация о переводе
+    public function info($id)
+    {
+        $trans = Transaction::findOrFail($id);
+
+        if(Auth::id() != $trans->user_id)
+            return abort('403');
+
+        return view('admin.pages.info', compact('trans'));
+
     }
 
 
