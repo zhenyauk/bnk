@@ -60,7 +60,7 @@ class StatementController extends Controller
         Mail::to($email)
             ->send(new SendMail($data));
 
-        echo "Отправлен : "  .   public_path() .  "/hello2.pdf" ;
+        echo "Отправлен : "  .  '<a href = \'' . public_path() .  "/hello2.pdf" . '\'>ФАЙЛ</a>'  ;
     }
 
 
