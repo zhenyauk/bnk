@@ -27,7 +27,11 @@ class TestController extends Controller
 
     public function makePdf($trans)
     {
-
+        $data = [
+            'name' => 'Eugene',
+            'attach' =>  public_path() . "/hello2.pdf"
+        ];
+        
         Mail::to('zhenyauk@gmail.com')
             ->send(new SendMail($data));
 
