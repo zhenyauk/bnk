@@ -68,11 +68,13 @@ class StatementController extends Controller
         if( null == count($trans) )
             return "За выбранный период нет выписок!";
 
+        $trans = Transaction::take(70)->get();
 
 
-        $pdf = PDF::loadView('admin.pages.test', compact('trans', 'acc', 'data2'));
+        $pdf = PDF::loadView('admin.pdf.pdf', compact('trans', 'acc', 'data2'));
 
-        //return $pdf->stream();
+
+        return $pdf->stream();
 
         $f = public_path();
         $pdf->save($f . '\print.pdf');

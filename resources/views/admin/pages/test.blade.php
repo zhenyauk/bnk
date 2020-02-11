@@ -46,16 +46,17 @@
 
 </style>
 <script type="text/php">
-if (isset($pdf)) {
-   $pdf->page_text(555, 745, "Page {PAGE_NUM}/{PAGE_COUNT}", $font, 7, array(0, 0, 0));
-}
+    if ( isset($pdf) ) {
+        $font = Font_Metrics::get_font("helvetica", "bold");
+        $pdf->page_text(72, 18, "Header: {PAGE_NUM} of {PAGE_COUNT}", $font, 6, array(0,0,0));
+    }
 </script>
 
 <body>
 
 
 <div class="left" style="float:left;">
-    <img src="{{ public_path('images\logo.png')}}" alt="ss">
+    <img style="width:165px; height:75px;" src="{{ public_path('images\logo5.png')}}" alt="ss">
     <div style="font-weight: bold; font-size: 12px; margin-top:-20px">AstroBank Limited</div>
     <br>
     <div style="font-weight: bold; font-size: 12px">BIC: PIRBCY2N</div>
@@ -64,9 +65,10 @@ if (isset($pdf)) {
 
 <div class="right" style="float: right;">
     <h2 style="font-weight: normal">Операции по счету</h2>
-    <div class="line" style="text-align: right; width: 240px;">С: {{$data2['from_date'] ?? '10-10-2019'}}</div>
-    <div class="line" style="text-align: right; width: 240px;">ПО: {{$data2['to_date'] ?? '10-10-2020'}}</div>
+    <div class="line" style="text-align: right; width: 235px;  font-size: 12px">С: {{ $data2['from_date'] ?? '10-10-2019' }}</div>
+    <div class="line" style="text-align: right; width: 235px; font-size: 12px ">ПО: {{ $data2['to_date'] ?? '10-10-2020' }}</div>
 </div>
+
 <div class="clear" style="clear: both"></div>
 <br>
 <div class="clear" style="clear: both"></div>
@@ -88,16 +90,17 @@ if (isset($pdf)) {
     <div class="right-div" >
         <div class="mc-1">
             <p>Номер cчета:   &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp Тип </p>
-            <p style="font-size: 9px">{{$acc->number}}  &nbsp  &nbsp <span style="font-size: 9px;">{{$acc->accounttype->title}} </span></p>
+            <p style="font-size: 11px">{{$acc->number}}  &nbsp  &nbsp <span style="font-size: 11px;">COMMERCIAL CURRENT ACC {{\App\Helpers\CurrencyHelper::getCurrencyCode($acc->id)}} </span></p>
             <br>
 
             <p>{{$acc->iban}}</p>
             <br>
 
-            <p>отделение заполнить адресс</p>
-            <br> <br>
+            <p>INTERNATIONAL BANKING UNIT - <br> NICOSIA
+            </p><p>&nbsp;</p>
 
-            <p>отделение владелец заполнить</p>
+
+            <p style="margin-top: -5px">JETLUX LTD [Основной владелец]</p>
             <br>
 
 
@@ -115,9 +118,9 @@ if (isset($pdf)) {
 
 <div class="clearfix" style="clear: both"></div>
 
-    <table id="transact" style="font-size: 11px; font-weight: normal; margin-left: -50px">
-        <tr style="color:white; background: #000; text-align: center; ">
-            <th style="width:100px">Дата</th>
+    <table border="0" id="transact" style="font-size: 11px; font-weight: normal;  ">
+        <tr style="color:white; margin: 0; background: #000; text-align: center; border:0" >
+            <th style="width:100px; border:0;">Дата</th>
             <th style="padding: 5px">Описание операции</th>
             <th>Дата валютирования</th>
             <th style="width:40px">Списание</th>
