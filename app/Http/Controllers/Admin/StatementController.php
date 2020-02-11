@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Account;
 use App\Http\Controllers\Controller;
 use App\Mail\SendMail;
+use App\Transaction;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Mail;
@@ -28,22 +30,47 @@ class StatementController extends Controller
         if( $account->user_id != Auth::id() )
             return abort('403');
 
+        $trans = Transaction::query();
+
+        $trans->where('user_id', Auth::id())->where('account_id', $account->id);
+
+        if($request->has('from_date')){
+            if($request->from_date != null){
+                $data['from_date'] = $this->makeDate($request->from_date);
+                $trans->where('created_at','>' , '2014-05-05');
+            }
+        }
 
 
-        return $this->send($account, $request->email);
+
+
+        if($request->has('to_date')){
+            if($request->to_date != null){
+                $data['to_date'] = $this->makeDate($request->to_date);
+                $trans->where('created_at','<' , $data['to_date']);
+            }
+        }
+        $trans = $trans->get();
+
+        $data['email'] = $request->email;
+
+
+        return $this->send($account, $trans , $data);
 
 
     }
 
 
 
-    public function send($acc, $email)
+    public function send($acc, $trans,  $data2)
     {
-        if( null == count($trans = $acc->transactions) )
-            abort('403');
+
+        if( null == count($trans) )
+            return "За выбранный период нет выписок!";
 
 
-        $pdf = PDF::loadView('admin.pages.test', compact('trans', 'acc'));
+
+        $pdf = PDF::loadView('admin.pages.test', compact('trans', 'acc', 'data2'));
 
         //return $pdf->stream();
 
@@ -57,11 +84,22 @@ class StatementController extends Controller
 
         //$this->password(public_path() . "/hello2.pdf");
 
-        Mail::to($email)
+        Mail::to($data2['email'])
             ->send(new SendMail($data));
 
         echo "Отправлен : <a href='/print.pdf'>ФАЙЛ</a>"  ;
     }
+
+    public function makeDate($date)
+    {
+        if( strpos($date, "/") ){
+            $dt = Carbon::createFromFormat('d/m/Y', $date);
+            return $dt->toDateString();
+        }else{
+            return $date;
+        }
+    }
+
 
 
 }

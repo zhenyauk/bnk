@@ -13,7 +13,7 @@
 
                     <p style="font-weight: bold; margin-top:20px">Параметры выписки</p>
 
-                <form action="{{route('statement.post')}}" method="post">
+                <form autocomplete="off"  action="{{route('statement.post')}}" method="post">
 
                     @foreach($accounts as $item)
                         <input required type="radio" name="account[]" value="{{$item->id}}">{{$item->number}} <br>
@@ -21,8 +21,8 @@
                         <br>
 
                     @csrf
-                    <p>С: <input type="text" class="" name="from"></p><br>
-                    <p>ПО: <input type="text" class=""name="to" ></p><br>
+                    <p>С: <input type="text" class="datepicker" name="from_date"></p><br>
+                    <p>ПО: <input type="text" class="datepicker" name="to_date" ></p><br>
 
                     <p>email: <input required type="email" class="" name="email"></p>
                     <br>

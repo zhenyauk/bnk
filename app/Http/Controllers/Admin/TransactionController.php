@@ -175,8 +175,6 @@ class TransactionController extends Controller
         }else{
             return $date;
         }
-
-
     }
 
 

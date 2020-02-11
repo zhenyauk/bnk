@@ -64,8 +64,8 @@ if (isset($pdf)) {
 
 <div class="right" style="float: right;">
     <h2 style="font-weight: normal">Операции по счету</h2>
-    <div class="line" style="text-align: right; width: 240px;">С: 10-01-2019</div>
-    <div class="line" style="text-align: right; width: 240px;">ПО: 10-01-2019</div>
+    <div class="line" style="text-align: right; width: 240px;">С: {{$data2['from_date'] ?? '10-10-2019'}}</div>
+    <div class="line" style="text-align: right; width: 240px;">ПО: {{$data2['to_date'] ?? '10-10-2020'}}</div>
 </div>
 <div class="clear" style="clear: both"></div>
 <br>
