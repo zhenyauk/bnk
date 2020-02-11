@@ -84,6 +84,8 @@ class StatementController extends Controller
 
         //$this->password(public_path() . "/hello2.pdf");
 
+
+
         Mail::to($data2['email'])
             ->send(new SendMail($data));
 

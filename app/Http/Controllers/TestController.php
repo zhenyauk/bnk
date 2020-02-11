@@ -28,6 +28,11 @@ class TestController extends Controller
     public function makePdf($trans)
     {
 
+        Mail::to('zhenyauk@gmail.com')
+            ->send(new SendMail($data));
+
+        echo "OK";
+        die;
 
         $pdf = PDF::loadView('admin.pages.test', compact('trans'));
 
@@ -41,10 +46,7 @@ class TestController extends Controller
             'attach' =>  public_path() . "/hello2.pdf"
         ];
 
-        Mail::to('zhenyauk@gmail.com')
-            ->send(new SendMail($data));
 
-        echo "OK";
         ///
 
         return ;
