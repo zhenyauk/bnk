@@ -113,19 +113,19 @@
                 @include('admin.pdf.pdf-top')
             @endif
             <p><div class="rows" style="font-weight: 600;">
-                <div>{{$item->created_at->format('d.m.Y')}} {{$loop->iteration}}</div>
+                <div>{{$item->created_at->format('d.m.Y')}} </div>
                 <div>{{$item->description}}</div>
                 <div>{{$item->created_at->format('d.m.Y')}}</div>
                 <div>@if($item->type == 'OUT') {{$item->amount}} @endif</div>
                 <div>@if($item->type == 'IN') {{$item->amount}} @endif</div>
-                <div>{{$item->amount}}</div>
+                <div>{{$item->balance}}</div>
             </div>
             </p>
             <div class="clear" style="clear: both"></div>
             @if($loop->last)
                     <p ><div style="border: 2px solid #000" class="rows">
                         <div style="width: 550px; text-align: left; font-weight: bold; font-size: 14px">Выписка о текущем состоянии</div>
-                        <div style=" font-weight: bold; font-size: 14px">{{$item->amount}}</div>
+                        <div style=" font-weight: bold; font-size: 14px">{{$item->balance}}</div>
                     </div>
                     </p>
             @endif
