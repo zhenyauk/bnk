@@ -82,20 +82,40 @@
     }
 </style>
 
-
+<style>
+    .footer-blue p{
+        color:white;
+        font-size: 9px;
+        margin: 1px;
+        padding: 1px;
+    }
+    .footer-blue{
+        background: #29317A;
+        width:100%;
+        height: 65px;
+        text-align: center;
+    }
+</style>
 <body>
     @include('admin.pdf.pdf-top')
 
     <div class="mtable-cont">
         @foreach($trans as $item)
-            @if($loop->iteration % 11 == 0)
+            @if($loop->iteration % 9 == 0)
                 <br><br>
+                <div class="footer-blue" >
+                    <p style="padding-top: 7px;">AstroBank Limited - HEAD OFFICE</p>
+                    <p>1 Spyrou Kyprianou Avenue, 1065 Nicosia, P.O.Box 25700, 1393 Nicosia Cyprus</p>
+                    <p>BIC: PIRBCY2N, E-mail: info@astrobank.com, Web site: http://www.astrobank.com</p>
+                </div>
+                <br> <br>
+
                 @include('admin.pdf.pdf-top')
             @endif
-            <p><div class="rows">
-                <div>{{$item->created_at->format('d-m-Y')}} {{$loop->iteration}}</div>
+            <p><div class="rows" style="font-weight: 600;">
+                <div>{{$item->created_at->format('d.m.Y')}} {{$loop->iteration}}</div>
                 <div>{{$item->description}}</div>
-                <div>{{$item->created_at->format('d-m-Y')}}</div>
+                <div>{{$item->created_at->format('d.m.Y')}}</div>
                 <div>@if($item->type == 'OUT') {{$item->amount}} @endif</div>
                 <div>@if($item->type == 'IN') {{$item->amount}} @endif</div>
                 <div>{{$item->amount}}</div>

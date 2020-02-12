@@ -37,11 +37,12 @@ class StatementController extends Controller
         if($request->has('from_date')){
             if($request->from_date != null){
                 $data['from_date'] = $this->makeDate($request->from_date);
-                $trans->where('created_at','>' , '2014-05-05');
+                $trans->where('created_at','>' , $data['from_date']);
             }
+        }else{
+            $data['from_date'] = Carbon::today()->subYear();
+            $trans->where('created_at','>' , $data['from_date']);
         }
-
-
 
 
         if($request->has('to_date')){
@@ -49,7 +50,12 @@ class StatementController extends Controller
                 $data['to_date'] = $this->makeDate($request->to_date);
                 $trans->where('created_at','<' , $data['to_date']);
             }
+        }else{
+            $data['to_date'] = Carbon::today();
+            $trans->where('created_at','<' , $data['to_date']);
         }
+
+
         $trans = $trans->get();
 
         $data['email'] = $request->email;
@@ -68,7 +74,7 @@ class StatementController extends Controller
         if( null == count($trans) )
             return "За выбранный период нет выписок!";
 
-        $trans = Transaction::take(70)->get();
+        //$trans = Transaction::take(70)->get();
 
 
         $pdf = PDF::loadView('admin.pdf.pdf', compact('trans', 'acc', 'data2'));
