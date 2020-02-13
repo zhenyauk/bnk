@@ -80,7 +80,7 @@ class StatementController extends Controller
         $pdf = PDF::loadView('admin.pdf.pdf', compact('trans', 'acc', 'data2'));
 
 
-        return $pdf->stream();
+       // return $pdf->stream();
 
         $f = public_path();
         $pdf->save($f . '\print.pdf');
