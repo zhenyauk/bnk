@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth'], function(){
 
 
     Route::any('test', 'TestController@index')->name('test');
+    Route::get('test2', 'Test2Controller@index');
 
     # Export
     Route::get('export/trans/{id}', 'Admin\ExportController@transactions')->name('export.trans');
