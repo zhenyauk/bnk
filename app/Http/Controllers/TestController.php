@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
 use Dompdf\Options;
 use Dompdf\Dompdf;
-use Zip
+use Zip;
 
 class TestController extends Controller
 {
