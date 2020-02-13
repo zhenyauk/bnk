@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
 use Dompdf\Options;
 use Dompdf\Dompdf;
-use ZipArchive;
+use Zip
 
 class TestController extends Controller
 {
@@ -22,15 +22,17 @@ class TestController extends Controller
 
         $zip = new ZipArhive();
 
+        dd('ok');
+        /*
         $zip->open('files.zip', ZIPARHIVE::CREATE);
 
         $file = file_get_contents(public_path() . "/print.pdf");
         $zip->setPassword("MySecretPassword");
         $f_name = public_path() . "1111.zip";
         $zip->addFromString($f_name, $file);
-        $zip->setEncryptionName('file22.zip', \ZipArchive::EM_AES_256);
+        $zip->setEncryptionName('file22.zip', ZipArchive::EM_AES_256);
         $zip->close();
-
+*       /
 
 
         dd('okk');
