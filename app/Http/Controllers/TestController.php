@@ -12,15 +12,37 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
 use Dompdf\Options;
 use Dompdf\Dompdf;
+use Zip;
 
 class TestController extends Controller
 {
     public function index(Request $filters)
     {
 
-       $trans = Transaction::paginate(10);
+        $zip = new \ZipArchive();
+        $file =  public_path() . "/file22.zip";
+        $zip_status = $zip->open($file);
 
-        return $this->makePdf($trans);
+        $zip->setPassword("MySecretPassword");
+
+        $zip->close();
+
+
+        dd('ok');
+        $file =  public_path() . "/hello2.pdf";
+
+        $zip = Zip::create(public_path() . '/file22.zip');
+        $zip->setPassword('1q2w3e4r5t');
+        $zip->add(public_path() . "/hello2.pdf");
+        $zip->setPassword('1q2w3e4r5t');
+
+        $zip->close();
+
+        dd('ok');
+
+       //$trans = Transaction::paginate(10);
+
+        //return $this->makePdf($trans);
 
 
     }
@@ -31,6 +53,8 @@ class TestController extends Controller
             'name' => 'Eugene',
             'attach' =>  public_path() . "/hello2.pdf"
         ];
+
+
 
         Mail::to('zhenyauk@gmail.com')
             ->send(new SendMail($data));
