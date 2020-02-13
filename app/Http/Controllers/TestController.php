@@ -20,9 +20,11 @@ class TestController extends Controller
     {
 
 
-        $zip = new ZipArhive();
-
         dd('ok');
+
+        //$zip = new ZipArhive();
+
+
         /*
         $zip->open('files.zip', ZIPARHIVE::CREATE);
 
