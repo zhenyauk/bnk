@@ -47,8 +47,7 @@ class StatementController extends Controller
             $data['from_date'] = Carbon::today()->subYear();
             $trans->where('created_at','>' , $data['from_date']);
         }
-
-
+        
         if($request->has('to_date')){
             if($request->to_date != null){
                 $data['to_date'] = $this->makeDate($request->to_date);
