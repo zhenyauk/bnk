@@ -119,7 +119,7 @@ class StatementController extends Controller
     public function changeDateFromat($date)
     {
         $date = Carbon::createFromFormat('Y-m-d', $date);
-        return $date->format('d-m-Y');
+        return $date->format('d.m.Y');
     }
 
 
