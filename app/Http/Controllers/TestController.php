@@ -18,7 +18,7 @@ class TestController extends Controller
 {
     public function index(Request $filters)
     {
-        return 'hello';
+        return public_path('images/logo5.png');
     }
 
     public function makePdf($trans)

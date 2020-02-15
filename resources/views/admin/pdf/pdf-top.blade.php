@@ -1,6 +1,6 @@
 
 <div class="left" style="float:left;">
-    <img style="width:165px; height:75px;" src="{{ public_path('images\logo5.png')}}" alt="ss">
+    <img style="width:165px; height:75px;" src="{{ public_path('\images\logo5.png')}}" alt="ss">
     <div style="font-weight: bold; font-size: 12px; margin-top:-20px">AstroBank Limited</div>
     <br>
     <div style="font-weight: bold; font-size: 12px">BIC: PIRBCY2N</div>
