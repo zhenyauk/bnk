@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Account;
 use App\Http\Controllers\Controller;
+use App\Jobs\SendPdf;
 use App\Mail\SendMail;
 use App\Transaction;
 use Carbon\Carbon;
@@ -61,6 +62,8 @@ class StatementController extends Controller
         $data['email'] = $request->email;
 
 
+        //SendPdf::dispatch($account, $trans , $data);
+        //return "OK";
         return $this->send($account, $trans , $data);
 
 
@@ -74,7 +77,9 @@ class StatementController extends Controller
         if( null == count($trans) )
             return "За выбранный период нет выписок!";
 
-        //$trans = Transaction::take(70)->get();
+
+        $data2['from_date'] = $this->changeDateFromat($data2['from_date']);
+        $data2['to_date'] = $this->changeDateFromat($data2['to_date']);
 
         //return view('admin.pdf.pdf', compact('trans', 'acc', 'data2'));
         $pdf = PDF::loadView('admin.pdf.new', compact('trans', 'acc', 'data2'));
@@ -109,6 +114,12 @@ class StatementController extends Controller
         }else{
             return $date;
         }
+    }
+
+    public function changeDateFromat($date)
+    {
+        $date = Carbon::createFromFormat('Y-m-d', $date);
+        return $date->format('d-m-Y');
     }
 
 

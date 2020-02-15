@@ -16,7 +16,7 @@ class ImportController extends Controller
 
     public function import()
     {
-        $file = public_path('upload') .'\\' . '4444.xlsx'  ;
+        $file = public_path('upload') .'\\' . 'work.xlsx'  ;
 
         $data = Excel::Import( new TransactionImport(), $file );
 
