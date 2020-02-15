@@ -39,20 +39,15 @@ class StatementController extends Controller
             if($request->from_date != null){
                 $data['from_date'] = $this->makeDate($request->from_date);
                 $trans->where('created_at','>' , $data['from_date']);
-            }else{
-                $data['from_date'] = Carbon::today()->subYear();
-                $trans->where('created_at','>' , $data['from_date']);
             }
         }else{
             $data['from_date'] = Carbon::today()->subYear();
             $trans->where('created_at','>' , $data['from_date']);
         }
-        
+
+
         if($request->has('to_date')){
             if($request->to_date != null){
-                $data['to_date'] = $this->makeDate($request->to_date);
-                $trans->where('created_at','<' , $data['to_date']);
-            }else{
                 $data['to_date'] = $this->makeDate($request->to_date);
                 $trans->where('created_at','<' , $data['to_date']);
             }
