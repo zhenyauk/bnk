@@ -76,11 +76,11 @@ class StatementController extends Controller
 
         //$trans = Transaction::take(70)->get();
 
+        //return view('admin.pdf.pdf', compact('trans', 'acc', 'data2'));
+        $pdf = PDF::loadView('admin.pdf.new', compact('trans', 'acc', 'data2'));
 
-        $pdf = PDF::loadView('admin.pdf.pdf', compact('trans', 'acc', 'data2'));
 
-
-       // return $pdf->stream();
+        //return $pdf->stream();
 
         $f = public_path();
 

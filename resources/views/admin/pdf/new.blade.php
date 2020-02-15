@@ -102,41 +102,44 @@
     }
 </style>
 <body>
-    @include('admin.pdf.pdf-top')
+@include('admin.pdf.pdf-top')
 
-    <div class="mtable-cont" style="position:relative;">
-        @foreach($trans as $item)
-            @if($loop->iteration % 9 == 0)
-                <br><br>
-            <div class="footer-blue" style="position: absolute; bottom:100px;">
-                    <p style="padding-top: 7px;">AstroBank Limited - HEAD OFFICE</p>
-                    <p>1 Spyrou Kyprianou Avenue, 1065 Nicosia, P.O.Box 25700, 1393 Nicosia Cyprus</p>
-                    <p>BIC: PIRBCY2N, E-mail: info@astrobank.com, Web site: http://www.astrobank.com</p>
-                </div>
-                <div class="page-break"></div>
-
-                @include('admin.pdf.pdf-top')
-            @endif
-            <div class="rows" style="font-weight: 600; overflow: hidden; ">
-                <div style="overflow: hidden">{{$item->created_at->format('d.m.Y') ?? 'Unknown'}} </div>
-                <div  style="overflow: hidden">{{$item->description  ?? 'Unknown'}}</div>
-                <div  style="overflow: hidden">{{$item->created_at->format('d.m.Y') ?? 'Unknown'}}</div>
-                <div  style="overflow: hidden">@if($item->type == 'OUT') {{$item->amount}} @endif</div>
-                <div  style="overflow: hidden"> @if($item->type == 'IN') {{$item->amount}} @endif</div>
-                <div  style="overflow: hidden">{{$item->balance}}</div>
+<div class="mtable-cont" style="position:relative;">
+    @foreach($trans as $item)
+        @if($loop->iteration % 6 == 0)
+            <br><br>
+            <div class="footer-blue" style="position: absolute; bottom:20px;">
+                <p style="padding-top: 7px;">AstroBank Limited - HEAD OFFICE</p>
+                <p>1 Spyrou Kyprianou Avenue, 1065 Nicosia, P.O.Box 25700, 1393 Nicosia Cyprus</p>
+                <p>BIC: PIRBCY2N, E-mail: info@astrobank.com, Web site: http://www.astrobank.com</p>
             </div>
+            <div class="page-break"></div>
 
-            <div class="clear" style="clear: both"></div>
-            @if($loop->last)
-                    <p ><div style="border: 2px solid #000" class="rows">
-                        <div style="width: 550px; text-align: left; font-weight: bold; font-size: 14px">Выписка о текущем состоянии</div>
-                        <div style=" font-weight: bold; font-size: 14px">{{$item->balance}}</div>
-                    </div>
-                    </p>
-            @endif
-        @endforeach
+            @include('admin.pdf.pdf-top')
+        @endif
 
-    </div>
+            <table border="0" style="font-size:12px; text-align: center">
+                <tr>
+                    <td style="width: 85px;">{{$item->created_at->format('d.m.Y') ?? 'Unknown'}}</td>
+                    <td style="overflow:hidden; width: 185px; height: 50px">{{$item->description  ?? 'Unknown'}}</td>
+                    <td style="width:145px;">{{$item->created_at->format('d.m.Y') ?? 'Unknown'}}</td>
+                    <td style="width: 80px">&nbsp;@if($item->type == 'OUT') {{$item->amount}} @endif</td>
+                    <td style="width: 80px">&nbsp;@if($item->type == 'IN') {{$item->amount}} @endif</td>
+                    <td style="width: 80px">{{$item->balance}}</td>
+                </tr>
+            </table>
+
+
+        @if($loop->last)
+            <p ><div style="border: 2px solid #000" class="rows">
+                <div style="width: 550px; text-align: left; font-weight: bold; font-size: 14px">Выписка о текущем состоянии</div>
+                <div style=" font-weight: bold; font-size: 14px">{{$item->balance}}</div>
+            </div>
+            </p>
+        @endif
+    @endforeach
+
+</div>
 <!--
 <table border="0" id="transact" style="font-size: 11px; font-weight: normal;  ">
     <tr style="color:white; margin: 0; background: #000; text-align: center; border:0" >
@@ -149,8 +152,8 @@
     </tr>
 
     @foreach($trans as $item)
-        <tr>
-            <td style="height: 90px; text-align: center">{{$item->created_at->format('d-m-Y')}}</td>
+    <tr>
+        <td style="height: 90px; text-align: center">{{$item->created_at->format('d-m-Y')}}</td>
             <td style=" text-align: center; font-size: 10px">{{$item->description ?? ''}}</td>
             <td style=" text-align: center">{{$item->created_at->format('d-m-Y')}}</td>
             <td style=" text-align: center">
@@ -167,16 +170,16 @@
 
         </tr>
         @if ($loop->last)
-            <tr>
+        <tr>
 
-            </tr>
-        @endif
-    @endforeach
+        </tr>
+@endif
+@endforeach
 
-</table>
-
-
+        </table>
 
 
 
-</body>
+
+
+        </body>
