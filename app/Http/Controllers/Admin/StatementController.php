@@ -83,7 +83,7 @@ class StatementController extends Controller
         //return $pdf->stream();
 
         $f = public_path();
-
+        dd('done');
         $pdf->save($f . '\print.pdf');
 
         $data = [
