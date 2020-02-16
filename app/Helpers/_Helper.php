@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Account;
 use App\Country;
 use App\Leftmenu;
+use App\Log;
 use Carbon\Carbon;
 
 class _Helper {
@@ -34,6 +35,15 @@ class _Helper {
     public static function getAccountNumber($id)
     {
         return Account::find($id)->number;
+    }
+
+    public static function addLog($user_id, $operation)
+    {
+        $log = new Log();
+        $log->user_id = $user_id;
+        $log->operation = $operation;
+        $log->save();
+        return true;
     }
 
 

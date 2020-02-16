@@ -50,6 +50,8 @@ Route::group(['middleware' => 'auth'], function(){
 
     Route::get('services', 'Admin\ServiceController@index')->name('services.index');
 
+    Route::any('logs', 'LogController@index')->name('logs.index');
+
 
 
     Route::any('test', 'TestController@index')->name('test');

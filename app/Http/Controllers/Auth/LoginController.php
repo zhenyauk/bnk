@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Activity;
+use App\Helpers\_Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
 use App\Providers\RouteServiceProvider;
@@ -46,12 +47,18 @@ class LoginController extends Controller
         $cred = $request->only('email', 'password');
         if( Auth::attempt($cred) ){
             $this->activity(Auth::user());
+            $this->addLog(Auth::id());
             return redirect($this->redirectTo);
         }
 
 
         return back()->withErrors('Please, Check Email or Password');
 
+    }
+
+    public function addLog($user_id)
+    {
+        $log = _Helper::addLog($user_id, 'Вход пользователя в систему');
     }
 
     // Activities
@@ -67,6 +74,7 @@ class LoginController extends Controller
     // Logout
     public function logout()
     {
+        _Helper::addLog(Auth::id(), 'Выход из системы');
         Auth::logout();
         return redirect('/');
     }
