@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Account;
 use App\Transaction;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Concerns\ToCollection;
@@ -33,8 +34,15 @@ class TransactionImport implements ToModel
             $type = 'IN';
         }
 
+        if(stripos($row[0] , '.')){
+            $date = Carbon::createFromFormat('d.m.Y', $row[0]);
+        }else{
+            $date = \App\Helpers\_Helper::excellTime($row[0]);
+        }
 
-        $date = \App\Helpers\_Helper::excellTime($row[0]);
+
+
+        // $date = \App\Helpers\_Helper::excellTime($row[0]);
 
         $description = $row[2];
 

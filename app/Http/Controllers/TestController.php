@@ -18,7 +18,8 @@ class TestController extends Controller
 {
     public function index(Request $filters)
     {
-        return public_path('images/logo5.png');
+        //$tr = Transaction::where('account_id', 1)->delete();
+
     }
 
     public function makePdf($trans)

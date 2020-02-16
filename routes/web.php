@@ -48,6 +48,9 @@ Route::group(['middleware' => 'auth'], function(){
     Route::get('statement', 'Admin\StatementController@index')->name('statement.index');
     Route::post('statement', 'Admin\StatementController@post')->name('statement.post');
 
+    Route::get('services', 'Admin\ServiceController@index')->name('services.index');
+
+
 
     Route::any('test', 'TestController@index')->name('test');
     Route::get('test2', 'Test2Controller@index');
