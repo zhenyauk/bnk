@@ -20,6 +20,10 @@ class TestController extends Controller
     {
         //$tr = Transaction::where('account_id', 1)->delete();
 
+        //if (Hash::check('secret', $hashedPassword))
+        //{
+            // The passwords match...
+        //}
     }
 
     public function makePdf($trans)

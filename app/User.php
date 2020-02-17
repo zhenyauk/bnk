@@ -54,6 +54,9 @@ class User extends Authenticatable
         return $this->hasMany(Account::class);
     }
 
-
+    public function pin()
+    {
+        return $this->hasOne(Pin::class);
+    }
 
 }

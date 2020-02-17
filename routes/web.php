@@ -7,6 +7,7 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::group(['middleware' => 'auth'], function(){
 
+    Route::get('/pin', 'Admin\PinController@getPins')->name('pin');
     Route::get('home', 'Admin\HomeController@index')->name('home');
     Route::get('/', 'Admin\HomeController@index')->name('home');
     Route::get('dashboard', 'Admin\DashboardController@index')->name('dashboard');

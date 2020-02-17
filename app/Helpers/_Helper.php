@@ -37,11 +37,23 @@ class _Helper {
         return Account::find($id)->number;
     }
 
-    public static function addLog($user_id, $operation)
+    public static function addLog($user_id, $operation, $status = 'Исполнено')
     {
         $log = new Log();
         $log->user_id = $user_id;
+        $log->data = "IP: " . $_SERVER['REMOTE_ADDR'] . " Дата: " . date('d-m-Y H:i:s');
         $log->operation = $operation;
+        $log->status = $status;
+        $log->save();
+        return true;
+    }
+
+    public static function addLogWithoutUserId($operation)
+    {
+        $log = new Log();
+        $log->data = "IP: " . $_SERVER['REMOTE_ADDR'] . " Дата: " . date('d-m-Y H:i:s');
+        $log->operation = $operation;
+        $log->status = "Ошибка";
         $log->save();
         return true;
     }

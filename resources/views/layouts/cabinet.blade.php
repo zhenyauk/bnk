@@ -59,8 +59,8 @@
                             <a href="{{route('transaction.arhive')}}" data-menu-id="remittances_index" class="main-menu__list">Денежные переводы</a>
                             <a href="{{route('transaction.in')}}" data-menu-id="remittances_index" class="main-menu__list">Входящие платежи</a>
                             <a href="{{route('payment.create')}}" data-menu-id="remittances_index" class="main-menu__list">Создать платеж</a>
+                            <a href="{{route('pin')}}" data-menu-id="remittances_index" class="main-menu__list">Pin пользователей</a>
                         </div>
-
                 @else
                     @include('parts.mainmenu')
                 @endif
