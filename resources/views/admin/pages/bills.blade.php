@@ -52,8 +52,6 @@
                 <div class="table__buttons ">
                     <a class="btn" href="/export/accounts" >Файл в формате Excel</a>
 
-                    <a class="btn" href="{{$_SERVER['REQUEST_URI']}}" download>Сохранить в HTML</a>
-
                     <a class="btn" href="#" onclick="print()">Печать</a>
                 </div>
 

@@ -11,7 +11,7 @@
 
 <body>
     <header class="header header_bg">
-        <div class="wrapper wrapper_default">
+        <div class="wrapper wrapper_default" style="position: relative">
             <div class="header__content">
                 <div class="header__logo">
                     <a href="/home">
@@ -32,7 +32,7 @@
                 </div>
 
             </div>
-            <!-- <span style="color:white; font-size: 10px; margin-bottom: 5px">{{date('Y-m-d H:i:s')}}</span> -->
+            <span  style="color:white; position: absolute;top:70px; left:30px; font-size: 11px; font-weight: bold; font-style: italic;  margin-bottom: 5px">{{date('d.m.Y')}}</span>
         </div>
 
         <script
@@ -47,7 +47,10 @@
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <script>
             $( function() {
-                $( ".datepicker" ).datepicker();
+                $( ".datepicker" ).datepicker({
+                    dateFormat: 'dd.mm.yy'
+                });
+
             } );
         </script>
     </header>

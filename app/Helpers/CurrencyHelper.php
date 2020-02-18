@@ -87,10 +87,10 @@ class CurrencyHelper{
     public static function getCurrency($id)
     {
         if($id === 1)
-            return "LEGAL COMMERCIAL EUR";
+            return "COMMERCIAL CURRENT ACC EUR / EUR";
 
         if($id === 2)
-            return "LEGAL COMMERCIAL USD";
+            return "COMMERCIAL CURRENT ACC USD / USD";
     }
 
     public static function getAccountCurrencyCode($id)

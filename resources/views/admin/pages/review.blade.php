@@ -53,7 +53,6 @@
 
                 <div class="table__buttons ">
                     <a href="{{route('export.accounts')}}"  class="btn">Сохранить в формате Excell</a>
-                    <a href="http://bnk/accounts" download class="btn">Сохранить в HTML</a>
                     <a href="#" class="btn"  onclick="print()">Печать</a>
                 </div>
 

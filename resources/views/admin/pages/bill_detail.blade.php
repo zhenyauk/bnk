@@ -144,8 +144,10 @@
 
                     </div>
                 </div>
-                <div class="table__buttons table__buttons_offset"><a href="#" class="btn">Назад</a></div>
-                <div class="table__buttons "><a href="#" class="btn">Файл в формате Excel</a> <a href="#" class="btn">Сохранить в HTML</a> <a href="#" class="btn">Печать</a></div>
+                <div class="table__buttons ">
+                    <a href="#" class="btn"  onclick="history.back();return false;">Назад</a></div>
+                <div class="table__buttons ">
+                    <a href="#" class="btn"  onclick="print()">Печать</a></div>
             </div>
         </div>
     </div>

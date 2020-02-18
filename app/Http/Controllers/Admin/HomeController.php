@@ -6,7 +6,7 @@ use App\Activity;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -14,6 +14,9 @@ class HomeController extends Controller
     {
         $user = Auth::user();
         $activities = $this->getActivities($user);
+        // Fix bug with PHP settings' time zone
+        $activities['created_at'] = Carbon::parse($activities['created_at'])->addHours(2);
+
 
         return view('admin.pages.home', compact('user', 'activities'));
     }

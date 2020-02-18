@@ -22,7 +22,7 @@
                     </div>
                     @endif
                 @endforeach
-
+                <p style="margin:20px"><a href="#" onclick="location.reload();">Обновить пины</a></p>
             </div>
 
 

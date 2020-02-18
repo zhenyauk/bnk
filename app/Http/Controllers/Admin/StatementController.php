@@ -47,8 +47,11 @@ class StatementController extends Controller
 
 
         if($request->has('to_date')){
+
             if($request->to_date != null){
+
                 $data['to_date'] = $this->makeDate($request->to_date);
+                dd($request->to_date);
                 $trans->where('created_at','<' , $data['to_date']);
             }
         }else{
@@ -118,7 +121,7 @@ class StatementController extends Controller
 
     public function changeDateFromat($date)
     {
-        $date = Carbon::createFromFormat('Y-m-d', $date);
+        $date = Carbon::createFromFormat('d.m.Y', $date);
         return $date->format('d.m.Y');
     }
 

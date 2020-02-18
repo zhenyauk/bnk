@@ -34,7 +34,7 @@ class PinController extends Controller
     {
         $pin = new Pin();
         $pin->user_id = $uid;
-        $pin->pin = Str::random(1) . rand(11111, 99909);
+        $pin->pin =  rand(110001, 990009);
         $pin->save();
         return $pin;
     }
