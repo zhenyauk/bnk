@@ -26,6 +26,27 @@
     @section('menu')
         {!! \App\Helpers\_Helper::getMenu() !!}
     @show
+    <style>
+        .time-line{
+            margin-left:10px; margin-top:5px; background:#E7E7E7; height: 15px; width: 90%;
+            -webkit-box-shadow: inset -4px 7px 20px -5px rgba(212,212,212,1);
+            -moz-box-shadow: inset -4px 7px 20px -5px rgba(212,212,212,1);
+            box-shadow: inset -4px 7px 20px -5px rgba(212,212,212,1);
+            overflow: hidden;
+        }
+        .ext{
+            font-size: 10px; position: absolute;top:6px; left:80px;
+        }
+    </style>
+    <div class="timer-warrper" style="position:relative; width:178px; height: 54px;background: #fff; border-radius: 10px;">
+        <div class="renew"><a href="#" id="ren" style="font-size: 10px; margin-left:5px;padding: 5px; 0 0 15px; text-decoration: underline">Обновить</a></div>
+        <div class="ext" >выход через <span id="min">9</span>:<span id="sec">59</span></div>
+        <div class="time-line" style="position: relative">
+            <img id="timeline" src="/images/timer.png" alt="" style="position: absolute; left: 0px;">
+        </div>
+    </div>
+
+
 
     <div class="main-menu_col main-menu__white main-sub-menu money sub-menu-item" data-menu-parent="remittances_index" style="display: none">
         <div class="main-sub-menu__list toggler">

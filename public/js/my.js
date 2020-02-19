@@ -63,8 +63,53 @@ $( document ).ready(function() {
     });
 
 
+    $('#ren').click(function (e) {
+        e.preventDefault();
+        $('#sec').text(59);
+        $('#min').text(9);
+
+        var left = parseInt( $('#timeline').css('left', 0 + 'px') );
+
+    });
+
+    setInterval(function(){
+        var s = parseInt($('#sec').text());
+        var m = parseInt($('#min').text())
+        s = s - 1;
+
+        if( m == 0 && s == 0 ){
+            return window.location='/logout';
+        }
+
+        if(s == 0){
+            s = 59;
+            m = $('#min').text();
+            m = m - 1;
+            $('#min').text(m);
+        }
+
+        iii = m * 60 + s;
+
+        if(iii % 4 == 0){
+            iii = 4;
+            var left = parseInt( $('#timeline').css('left') );
+            left = left - 1;
+            $('#timeline').css('left', left + 'px');
+        }
+
+
+        if(s < 10){
+            s = '0' + s;
+        }
+
+        $('#sec').text(s);
+
+
+    },1000);
 
 
 
 
-});
+
+
+    });

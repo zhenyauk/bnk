@@ -1,6 +1,6 @@
 @extends('layouts.cabinet')
 @section('title')
-Добро подаловать! | {{env('sitename', 'AstroBank')}}
+Добро пожаловать! | {{env('sitename', 'AstroBank')}}
 @stop
 @section('content')
     <div class="main-content main-content_height portfolio">

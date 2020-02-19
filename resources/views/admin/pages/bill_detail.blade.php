@@ -73,7 +73,7 @@
                             <div class="name">Наименьший остаток месяца:</div>
                             <div class="price">
                                 <div>
-                                    -38.382,22 USD
+                                   
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                             <div class="name">Средний остаток месяца:</div>
                             <div class="price">
                                 <div>
-                                    -247,15 USD
+
                                 </div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                             <div class="name">Входящий остаток текущего месяца:</div>
                             <div class="price">
                                 <div>
-                                    0,00 USD
+                                    0,00
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                             <div class="name">Входящий остаток последнего месяца:</div>
                             <div class="price">
                                 <div>
-                                    0,00 USD
+                                    0,00
                                 </div>
                             </div>
                         </div>
