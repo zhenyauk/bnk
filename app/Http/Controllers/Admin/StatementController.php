@@ -38,6 +38,7 @@ class StatementController extends Controller
         if($request->has('from_date')){
             if($request->from_date != null){
                 $data['from_date'] = $this->makeDate($request->from_date);
+
                 $trans->where('created_at','>' , $data['from_date']);
             }
         }else{
@@ -51,7 +52,6 @@ class StatementController extends Controller
             if($request->to_date != null){
 
                 $data['to_date'] = $this->makeDate($request->to_date);
-                dd($request->to_date);
                 $trans->where('created_at','<' , $data['to_date']);
             }
         }else{
@@ -76,13 +76,12 @@ class StatementController extends Controller
 
     public function send($acc, $trans,  $data2)
     {
-
         if( null == count($trans) )
             return "За выбранный период нет выписок!";
 
 
-        $data2['from_date'] = $this->changeDateFromat($data2['from_date']);
-        $data2['to_date'] = $this->changeDateFromat($data2['to_date']);
+        $data2['from_date'] = $this->makeNewDate($data2['from_date']);
+        $data2['to_date'] = $this->makeNewDate($data2['to_date']);
 
         //return view('admin.pdf.pdf', compact('trans', 'acc', 'data2'));
         $pdf = PDF::loadView('admin.pdf.new', compact('trans', 'acc', 'data2'));
@@ -111,17 +110,27 @@ class StatementController extends Controller
 
     public function makeDate($date)
     {
+        $dt = Carbon::createFromFormat('d.m.Y', $date);
+        return $dt->toDateString();
+        /*
         if( strpos($date, "/") ){
             $dt = Carbon::createFromFormat('d/m/Y', $date);
             return $dt->toDateString();
         }else{
             return $date;
         }
+        */
     }
 
     public function changeDateFromat($date)
     {
         $date = Carbon::createFromFormat('d.m.Y', $date);
+        return $date->format('d.m.Y');
+    }
+
+    public function makeNewDate($data)
+    {
+        $date = Carbon::createFromFormat('Y-m-d', $data);
         return $date->format('d.m.Y');
     }
 

@@ -9,8 +9,8 @@
 
 <div class="right" style="float: right;">
     <h2 style="font-weight: normal">Операции по счету</h2>
-    <div class="line" style="text-align: right; width: 235px;  font-size: 12px">С: {{ $data2['from_date'] ?? '10-10-2019' }}</div>
-    <div class="line" style="text-align: right; width: 235px; font-size: 12px ">ПО: {{ $data2['to_date'] ?? '10-10-2020' }}</div>
+    <div class="line" style="text-align: right; width: 235px;  font-size: 12px">С: {{ $data2['from_date']  }}</div>
+    <div class="line" style="text-align: right; width: 235px; font-size: 12px ">ПО: {{ $data2['to_date']  }}</div>
 </div>
 
 <div class="clear" style="clear: both"></div>

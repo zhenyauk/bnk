@@ -86,18 +86,16 @@ class TransactionController extends Controller
 
         if($request->has('from_date')){
             if($request->from_date != null){
-
                 $data['from_date'] = $this->makeDate($request->from_date);
-
-
                 $transactions->where('created_at','>' , $data['from_date']);
-            }
+                $data['from_date'] = $this->ReMakeDate($request->from_date);            }
         }
 
         if($request->has('to_date')){
             if($request->to_date != null){
                 $data['to_date'] = $this->makeDate($request->to_date);
                 $transactions->where('created_at','<' , $data['to_date']);
+                $data['to_date'] = $this->ReMakeDate($request->to_date);
             }
         }
 
@@ -116,6 +114,16 @@ class TransactionController extends Controller
         $data['trans'] = Transaction::orderBy('id', 'desc')->first();
         $data['accounts'] = $accounts;
         $data['account'] = $account ?? '';
+
+        if(isset($data['from_date'])){
+            $data['from_date'] = $this->ReMakeDate($data['from_date']);
+        }
+
+        if(isset($data['to_date'])){
+            $data['to_date'] = $this->ReMakeDate($data['to_date']);
+        }
+
+
         return $data;
     }
 
@@ -136,6 +144,7 @@ class TransactionController extends Controller
             if($request->from_date != null){
                 $data['from_date'] = $this->makeDate($request->from_date);
                 $transactions->where('created_at','>' , $data['from_date']);
+                $data['from_date'] = $this->makeDate($data['from_date']);
             }
         }
 
@@ -143,6 +152,7 @@ class TransactionController extends Controller
             if($request->to_date != null){
                 $data['to_date'] = $this->makeDate($request->to_date);
                 $transactions->where('created_at','<' , $data['to_date'] );
+                $data['to_date'] = $this->makeDate($data['to_date']);
             }
         }
 
@@ -163,17 +173,32 @@ class TransactionController extends Controller
         $data['trans'] = Transaction::orderBy('id', 'desc')->first();
         $data['accounts'] = $accounts;
         $data['account'] = $account;
+
         return $data;
     }
 
 
-    public function makeDate($date)
+    public function ReMakeDate($date)
     {
-        if( strpos($date, "/") ){
-            $dt = Carbon::createFromFormat('d/m/Y', $date);
+        if( strpos($date, ".") ){
+            $dt = Carbon::createFromFormat('d.m.Y', $date);
             return $dt->toDateString();
         }else{
-            return $date;
+            $dt = Carbon::createFromFormat('Y-m-d', $date);
+            return $dt->format('d.m.Y');
+        }
+
+    }
+
+    public function makeDate($date)
+    {
+        if( strpos($date, ".") ){
+            $dt = Carbon::createFromFormat('d.m.Y', $date);
+            return $dt->toDateString();
+
+        }else{
+            $dt = Carbon::createFromFormat('Y-m-d', $date);
+            return $dt->format('d.m.Y');
         }
     }
 
