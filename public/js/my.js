@@ -1,5 +1,21 @@
 $( document ).ready(function() {
 
+
+    $('#template_trigger').change(function(){
+        $('#template_input').val( $(this).val() );
+        $('#tempate_form_go').submit();
+    });
+///
+
+    $('.save-me-btn').click(function () {
+        $('.save_input').show();
+    });
+
+    $('#account_select222').change(function(){
+        $('.put-me').val( $(this).val() );
+    });
+
+
     $('#account_select').change(function(){
         $('#account_select_form').submit();
     });

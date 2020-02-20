@@ -24,6 +24,12 @@ class PaymentController extends Controller
     public function addPayment(Request $request)
     {
 
+        if($request->has('template') && $request->template != null){
+            $t = Template::find($request->template);
+        }else{
+            $t = null;
+        }
+
         if($request->has('account')){
             $account = Account::whereId($request->account)->where('user_id', Auth::id())->first();
         }else{
@@ -37,14 +43,13 @@ class PaymentController extends Controller
         $templates = Template::whereUserId(Auth::id())->get();
 
         return view('admin.pages.payment.add',
-            compact('accounts', 'account', 'countries', 'templates'));
+            compact('accounts', 'account', 'countries', 'templates', 't'));
     }
 
 
 
     public function store(PaymentRequest $request)
     {
-
         if($request->has('save'))
             $this->makeTemplate($request);
 
@@ -125,11 +130,18 @@ class PaymentController extends Controller
 
     public function makeTemplate($request)
     {
-       $template = new Template();
-       $template->fill($request->all());
-       $template->user_id = Auth::id();
-       $template->save();
-       return $template;
+       if($request->has('save_input') && $request->save_input != null){
+           $template = new Template();
+           $template->fill($request->all());
+           $template->name = $request->save_input;
+           $template->recipier_name = $request->payer_phone;
+           $template->account_id = $request->account;
+           $template->user_id = Auth::id();
+           $template->save();
+           return $template;
+       }
+       return true;
+
     }
 
     public function create()

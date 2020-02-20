@@ -3,7 +3,11 @@
 @section('title') Добавить платеж @stop
 
 @section('content')
-
+    <form action="/payment/add" method="post" id="tempate_form_go">
+        @csrf
+        <input type="hidden" name="template" id="template_input">
+        <input type="submit" style="display: none">
+    </form>
 
     <div class="main-content main-content_height" style="min-height: 700px; overflow: scroll">
         <div class="row">
@@ -35,9 +39,10 @@
                             <span class="red">*</span> Со счета
                         </div>
 
-                                <form id="account_select_form" action="/payment/add" method="post">
+
+                                <form id="account_select_form222" action="/payment/add" method="post">
                                     @csrf
-                                    <select name="account" id="account_select">
+                                    <select name="account" id="account_select222">
                                         @isset($accounts)
                                             @foreach($accounts as $item)
                                                 <option @if($account->id === $item->id) selected @endif value="{{$item->id}}">{{$item->number}}  {{$item->iban}} {{$item->balance_current}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($item->currency_id)}}</option>
@@ -52,23 +57,24 @@
                        
                         <form action="{{route('payment.store')}}" method="post">
                             <p style="margin:10px 0;"><label for="">Наименование плательщика</label></p>
-                            <p><textarea name="payer_name" id="" cols="20" rows="4"></textarea></p>
+                            <p><textarea name="payer_name" id="" cols="20" rows="4">{{$t->payer_name ?? ''}}</textarea></p>
 
                             <p style="margin:10px 0;"><label for="">Номер телефона плательщика</label></p>
-                            <p><input type="text" name="payer_phone"></p>
+                            <p><input type="text" name="payer_phone" value="{{$t->recipier_phone ?? ''}}"></p>
 
 
                     </div>
 
                     <div class="line-req">
 
-                            <input type="hidden" name="account" value="{{$account->id}}">
+                            <input type="hidden" class="put-me" name="account" value="{{$account->id}}">
                             <label> Пожалуйста, введите реквезиты получателя или выбирите соответствующие реквезиты из списка:</label>
-                            <select name="" id="">
-                                <option value="">Выбирите</option>
+
+                            <select id="template_trigger" >
+                                <option value="0">Выбирите</option>
                                 @isset($templates)
                                     @foreach($templates as $item)
-                                         <option value="{{$item->id}}">{{$item->iban}} | {{$item->recipier_name}}</option>
+                                         <option @if(isset($t) && $t->id === $item->id) selected @endif value="{{$item->id}}">{{$item->name}} | {{$item->recipier_name}}</option>
                                     @endforeach
                                 @endisset
                             </select>
@@ -77,21 +83,20 @@
 
                     <div class="textarea-content">
 
-
                         <div class="textareaitem" style="margin:10px 0">
                             <div class="textarea-block" style="float: left">
                                 Страна получателя*
                             </div>
                             <select name="country_id" value="recipier_country">
                                 @foreach($countries as $item)
-                                    <option  id="{{$item->id}}" value="{{$item->id}}">{{$item->name}}</option>
+                                    <option @if(isset($t) && ($t->country_id == $item->id)) selected @endif  id="{{$item->id}}" value="{{$item->id}}">{{$item->name}}</option>
                                 @endforeach
                             </select>
                         </div>
 
                         <div class="textarea__item">
                             <div class="textarea-block">Сумма*</div>
-                            <input name="amount" required type="number" class="form-control" style="margin-right: 10px">
+                            <input name="amount" value="{{$t->price ?? ''}}" required type="number" class="form-control" style="margin-right: 10px">
                             <select name="currency" id="">
                                 <option value="1" @if($account->currency_id == 1) selected @endif  >{{\App\Helpers\CurrencyHelper::getCurrencyCode(1)}}</option>
                                 <option value="2" @if($account->currency_id == 2) selected @endif >{{\App\Helpers\CurrencyHelper::getCurrencyCode(2)}}</option>
@@ -102,17 +107,17 @@
 
                         <div class="textarea__item">
                             <div class="textarea-block">IBAN/Счет Получателя*</div>
-                            <input type="text"  required name="iban" class="form-control">
+                            <input type="text" value="{{$t->iban ?? ''}}" required name="iban" class="form-control">
                         </div>
 
                         <div class="textarea__item">
                             <div class="textarea-block">Полное имя и адрес*</div>
-                            <input type="text" required name="recipier_name" class="form-control">
+                            <input type="text" value="{{$t->recipier_name ?? ''}}"  required name="recipier_name" class="form-control">
                         </div>
 
                         <div class="textarea__item">
                             <div class="textarea-block">БИК Банка получателя</div>
-                            <input type="text"  name="bic_bank" class="form-control">
+                            <input type="text" value="{{$t->bic_bank ?? ''}}" name="bic_bank" class="form-control">
                         </div>
 
 
@@ -120,14 +125,14 @@
                             <div class="textarea-block">
                                 Банк получателя*
                             </div>
-                            <input type="text"  required name="recipier_bank">
+                            <input type="text" value="{{$t->recipier_bank ?? ''}}" required name="recipier_bank">
                         </div>
 
                         <div class="textarea__item">
                             <div class="textarea-block">
                                 Детали платежа
                             </div>
-                            <textarea name="recipier_info" id="" cols="20" rows="3"></textarea>
+                            <textarea name="recipier_info" id="" cols="20" rows="3">{{$t->recipier_info ?? ''}}</textarea>
                         </div>
                         <div class="textarea__item">
                             <div class="textarea-block">
@@ -147,7 +152,8 @@
 
 
                         <div class="line-req">
-                            <label><input type="checkbox" name="save"> Сохранить реквизиты получателя под названием:</label>
+                            <label><input class="save-me-btn" type="checkbox" name="save"> Сохранить реквизиты получателя под названием:</label>
+                            <input type="text" name="save_input" class="save_input" value="" style="display: none;">
                         </div>
 
 

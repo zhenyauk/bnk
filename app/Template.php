@@ -19,4 +19,9 @@ class Template extends Model
         'bic_bank',
         'recipier_info',
     ];
+
+    public function getPriceAttribute()
+    {
+        return $this->amount * 1;
+    }
 }
