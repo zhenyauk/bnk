@@ -30,6 +30,15 @@ class Transaction extends Model
         'type', 'amount', 'balance', 'account_id', 'description', 'created_at' , 'updated_at', 'user_id'
     ];
 
+    public function getAmountAttribute($value)
+    {
+        return number_format($value, 2, ',', ' ');
+    }
+
+    public function getBalanceAttribute($value)
+    {
+        return number_format($value, 2, ',', ' ');
+    }
 
 
 

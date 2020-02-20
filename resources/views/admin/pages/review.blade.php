@@ -27,7 +27,7 @@
                             </div>
                             <div class="table__list_col table__list_col-center">{{$count[$loop->iteration - 1]}}</div>
                             <div class="table__list_col table__list_col-right">
-                                {{$amount[$loop->iteration - 1]}} EUR
+                                {{number_format($amount[$loop->iteration - 1], 2, ',', ' ')}} EUR
                             </div>
                         </div>
                         @endforeach

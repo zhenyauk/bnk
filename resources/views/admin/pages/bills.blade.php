@@ -32,7 +32,7 @@
                         </div>
                         <div class="table__list_col table__list_col-center">{{\App\Helpers\CurrencyHelper::getCurrency($item->currency_id)}}</div>
                         <div class="table__list_col table__list_col-right">
-                            {{$item->balance_current}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($item->currency_id)}}
+                            {{number_format($item->balance_current, 2, ',', ' ')}} {{\App\Helpers\CurrencyHelper::getCurrencyCode($item->currency_id)}}
                         </div>
                         <div class="table__list_col table__list_col-right">
                             <money-value :value="item.balance_available" :code="item.currency"></money-value>
