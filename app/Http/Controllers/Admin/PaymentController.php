@@ -23,6 +23,7 @@ class PaymentController extends Controller
 
     public function addPayment(Request $request)
     {
+
         if($request->has('account')){
             $account = Account::whereId($request->account)->where('user_id', Auth::id())->first();
         }else{

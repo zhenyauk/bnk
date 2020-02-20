@@ -73,7 +73,7 @@
                             <div class="name">Наименьший остаток месяца:</div>
                             <div class="price">
                                 <div>
-                                   
+
                                 </div>
                             </div>
                         </div>
