@@ -32,7 +32,22 @@
                 </div>
 
             </div>
-            <span  style="color:white; position: absolute;top:70px; left:30px; font-size: 11px; font-weight: bold; font-style: italic;  margin-bottom: 5px">{{date('d.m.Y')}}</span>
+            <span  style="color:white; position: absolute;top:70px; left:30px; font-size: 11px; font-weight: bold; font-style: italic;  margin-bottom: 5px">
+            @php
+                $day[0] = "Воскресенье";
+$day[1] = "Понедельник";
+$day[2] = "Вторник";
+$day[3] = "Среда";
+$day[4] = "Четверг";
+$day[5] = "Пятница";
+$day[6] = "Суббота";
+$time = '2015-01-01';
+$dnum = date("w",strtotime($time));
+$textday = $day[$dnum];
+echo $textday;
+           @endphp
+                {{date('d.m.Y')}}
+            </span>
         </div>
 
         <script
