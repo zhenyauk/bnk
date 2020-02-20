@@ -6,11 +6,13 @@ use App\Account;
 use App\Http\Controllers\Controller;
 use App\Jobs\SendPdf;
 use App\Mail\SendMail;
+use App\Statement;
 use App\Transaction;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use PDF;
 use ZipArchive;
 
@@ -91,21 +93,23 @@ class StatementController extends Controller
 
         $f = public_path();
 
-        $pdf->save($f . '/print.pdf');
+        $s_name = date('d-m-y') . "_" . Auth::id() . "_" . Str::random(4) . ".pdf";
+        $s_file = $f . '\\statements\\' . $s_name;
+        $pdf->save($s_file);
 
         $data = [
             'name' => 'Eugene',
-            'attach' =>  public_path() . "/print.pdf"
+            'attach' =>  $s_file
         ];
 
         //$this->password(public_path() . "/hello2.pdf");
 
-
+        $this->statementSave($s_name,  $data2['from_date'],  $data2['to_date']);
 
         Mail::to($data2['email'])
             ->send(new SendMail($data));
 
-        echo "Отправлен : <a href='/print.pdf'>ФАЙЛ</a>"  ;
+        echo "Отправлен : <a href='/statements/$s_name'>ФАЙЛ</a>"  ;
     }
 
     public function makeDate($date)
@@ -135,5 +139,20 @@ class StatementController extends Controller
     }
 
 
+    public function getStatements()
+    {
+        return view('admin.pages.getstatemnts');
+    }
+
+    public function statementSave($file, $from, $to)
+    {
+        $st = new Statement();
+        $st->from = $from;
+        $st->to = $to;
+        $st->user_id = Auth::id();
+        $st->url = $file;
+        $st->save();
+        return true;
+    }
 
 }

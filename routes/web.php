@@ -47,6 +47,7 @@ Route::group(['middleware' => 'auth'], function(){
     Route::post('payment/between', 'Admin\PaymentBetweenController@store')->name('between.post');
 
     Route::get('statement', 'Admin\StatementController@index')->name('statement.index');
+    Route::get('statms', 'Admin\StatementController@getStatements')->name('statement.get');
     Route::post('statement', 'Admin\StatementController@post')->name('statement.post');
 
     Route::get('services', 'Admin\ServiceController@index')->name('services.index');

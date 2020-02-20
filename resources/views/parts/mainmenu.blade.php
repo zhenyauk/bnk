@@ -39,7 +39,7 @@
         }
     </style>
     <div class="timer-warrper" style="position:relative; width:178px; height: 54px;background: #fff; border-radius: 10px;">
-        <div class="renew"><a href="#" id="ren" style="font-size: 10px; margin-left:5px;padding: 5px; 0 0 15px; text-decoration: underline">Обновить</a></div>
+        <div class="renew" style="opacity: 0;"><a href="#" id="ren" style="font-size: 10px; margin-left:5px;padding: 5px; 0 0 15px; text-decoration: underline">Обновить</a></div>
         <div class="ext" >выход через <span id="min">9</span>:<span id="sec">59</span></div>
         <div class="time-line" style="position: relative">
             <img id="timeline" src="/images/timer.png" alt="" style="position: absolute; left: 0px;">
