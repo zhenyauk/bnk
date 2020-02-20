@@ -18,7 +18,7 @@
                 <div class="card card__content">
                     <div class="card__content_blue">
 
-                  
+
 
                         <div class="subtitle subtitle_offset">
                             <span>

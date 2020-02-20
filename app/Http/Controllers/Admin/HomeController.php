@@ -15,7 +15,7 @@ class HomeController extends Controller
         $user = Auth::user();
         $activities = $this->getActivities($user);
         // Fix bug with PHP settings' time zone
-        $activities['created_at'] = Carbon::parse($activities['created_at'])->addHours(2);
+        $activities['created_at'] = Carbon::parse($activities['created_at'])->addHours(1);
 
 
         return view('admin.pages.home', compact('user', 'activities'));
