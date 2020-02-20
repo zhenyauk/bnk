@@ -34,19 +34,29 @@
             </div>
             <span  style="color:white; position: absolute;top:70px; left:30px; font-size: 11px; font-weight: bold; font-style: italic;  margin-bottom: 5px">
             @php
-                $day[0] = "Воскресенье";
-$day[1] = "Понедельник";
-$day[2] = "Вторник";
-$day[3] = "Среда";
-$day[4] = "Четверг";
-$day[5] = "Пятница";
-$day[6] = "Суббота";
-$time = '2015-01-01';
-$dnum = date("w",strtotime($time));
-$textday = $day[$dnum];
-echo $textday;
+                $arr = [
+                'январь',
+                'февраль',
+                'март',
+                'апрель',
+                'май',
+                'июнь',
+                'июль',
+                'август',
+                'сентябрь',
+                'октябрь',
+                'ноябрь',
+                'декабрь'
+              ];
+
+              // Поскольку от 1 до 12, а в массиве, как мы знаем, отсчет идет от нуля (0 до 11),
+              // то вычитаем 1 чтоб правильно выбрать уже из нашего массива.
+
+              $month = date('n')-1;
+              echo date('d') . " " . $arr[$month] ." ".  date('Y');
+
            @endphp
-                {{date('d.m.Y')}}
+
             </span>
         </div>
 
