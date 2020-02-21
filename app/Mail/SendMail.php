@@ -32,7 +32,7 @@ class SendMail extends Mailable
     public function build()
     {
         return $this->from('info@server05.pp.ua')
-            ->subject('Новая распечатка')->view('mymail')
+            ->subject('Statement of account')->view('mymail')
             ->with('data', $this->data)->attach($this->data['attach']);
 
         //return $this->view('view.name');
