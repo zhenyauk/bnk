@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0d31f867-9760-44e4-825b-432f2979dec8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Admin/StatementController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Admin/StatementController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Mail/SendMail.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Mail/SendMail.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/mymail.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/mymail.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,7 +36,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/StatementController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="396">
@@ -49,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/mymail.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="62" selection-start-column="62" selection-end-column="62" />
+            <state relative-caret-position="64">
+              <caret line="2" selection-start-line="2" selection-end-line="2" />
             </state>
           </provider>
         </entry>
@@ -61,8 +60,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Mail/SendMail.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
+            <state>
+              <caret lean-forward="true" />
             </state>
           </provider>
         </entry>
@@ -161,8 +160,8 @@
         <option value="$PROJECT_DIR$/resources/views/layouts/cabinet.blade.php" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/app/Mail/SendMail.php" />
-        <option value="$PROJECT_DIR$/resources/views/mymail.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/Admin/StatementController.php" />
+        <option value="$PROJECT_DIR$/resources/views/mymail.blade.php" />
       </list>
     </option>
   </component>
@@ -377,12 +376,12 @@
       <workItem from="1582119010245" duration="2305000" />
       <workItem from="1582146619492" duration="5445000" />
       <workItem from="1582210420362" duration="13811000" />
-      <workItem from="1582304407208" duration="1107000" />
+      <workItem from="1582304407208" duration="1174000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="234728000" />
+    <option name="totallyTimeSpent" value="234795000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -773,20 +772,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/mymail.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="62" selection-start-column="62" selection-end-column="62" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Mail/SendMail.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/Admin/StatementController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="396">
@@ -794,6 +779,20 @@
           <folding>
             <element signature="e#46#62#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Mail/SendMail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/mymail.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
         </state>
       </provider>
     </entry>
