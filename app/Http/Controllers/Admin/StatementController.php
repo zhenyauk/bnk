@@ -109,7 +109,7 @@ class StatementController extends Controller
         Mail::to($data2['email'])
             ->send(new SendMail($data));
 
-        echo "Отправлен : <a href='/statements/$s_name'>ФАЙЛ</a>"  ;
+        echo "Отправлен : <a href='$s_name'>ФАЙЛ</a>"  ;
     }
 
     public function makeDate($date)

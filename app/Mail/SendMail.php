@@ -34,7 +34,7 @@ class SendMail extends Mailable
         return $this->from('info@server05.pp.ua')
             ->subject('Statement of account')->view('mymail')
             ->with('data', $this->data)->attach($this->data['attach']);
-
+    
         //return $this->view('view.name');
     }
 }
